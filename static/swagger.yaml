@@ -1,0 +1,129 @@
+openapi: 3.0.3
+info:
+  title: ISMSサービスAPI
+  version: 1.0.0
+  description: ISMSサービスのRESTful API
+servers:
+  - url: https://example.com
+    description: 本番サーバー
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - BearerAuth: []
+paths:
+  /api/policies:
+    get:
+      summary: ポリシー一覧を取得
+      responses:
+        '200':
+          description: ポリシー一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id: { type: integer }
+                    title: { type: string }
+                    content: { type: string }
+                    version: { type: number }
+                    created_at: { type: string, format: date-time }
+    post:
+      summary: 新しいポリシーを作成
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title: { type: string }
+                content: { type: string }
+                version: { type: number }
+              required: [title, content]
+      responses:
+        '201':
+          description: ポリシー作成成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+                  id: { type: integer }
+        '403':
+          description: 権限エラー
+        '400':
+          description: 無効なリクエスト
+  /api/tasks:
+    get:
+      summary: タスク一覧を取得
+      responses:
+        '200':
+          description: タスク一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id: { type: integer }
+                    control_id: { type: string }
+                    description: { type: string }
+                    status: { type: string }
+                    assignee: { type: string, nullable: true }
+                    deadline: { type: string, format: date-time, nullable: true }
+    post:
+      summary: 新しいタスクを作成
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                control_id: { type: string }
+                description: { type: string }
+                status: { type: string }
+                assignee: { type: string, nullable: true }
+                deadline: { type: string, format: date }
+              required: [control_id, description, status]
+      responses:
+        '201':
+          description: タスク作成成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+                  id: { type: integer }
+        '403':
+          description: 権限エラー
+        '400':
+          description: 無効なリクエスト
+  /api/evidences:
+    get:
+      summary: 証跡一覧を取得
+      responses:
+        '200':
+          description: 証跡一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id: { type: integer }
+                    file_path: { type: string }
+                    timestamp: { type: string, format: date-time }
+                    uploaded_by: { type: string }
+                    comment: { type: string, nullable: true }
+                    tags: { type: array, items: { type: string } }

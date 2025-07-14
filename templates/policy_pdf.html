@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ポリシー: {{ policy.title }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        h1 { color: #007bff; }
+        pre { white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <h1>{{ policy.title }} (バージョン: {{ policy.version }})</h1>
+    <p>作成日: {{ policy.created_at }}</p>
+    <p>タグ: {{ policy.tags|map(attribute='name')|join(', ') }}</p>
+    <pre>{{ policy.content }}</pre>
+</body>
+</html>

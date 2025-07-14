@@ -1,0 +1,310 @@
+2025-07-10 10:28:31,995 [ERROR] ���ϐ� SQLALCHEMY_DATABASE_URI ���ݒ肳��Ă��܂���
+2025-07-10 11:16:25,459 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-10 11:16:25,459 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-10 11:16:25,460 [INFO] Added job "check_task_deadlines" to job store "default"
+2025-07-10 11:16:25,460 [INFO] Added job "backup_database" to job store "default"
+2025-07-10 11:16:25,460 [INFO] Scheduler started
+2025-07-10 11:16:25,472 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-07-10 11:16:25,473 [INFO] [33mPress CTRL+C to quit[0m
+2025-07-10 11:18:15,827 [INFO] 127.0.0.1 - - [10/Jul/2025 11:18:15] "[32mGET /tasks HTTP/1.1[0m" 301 -
+2025-07-10 11:18:16,136 [ERROR] 127.0.0.1 - - [10/Jul/2025 11:18:16] code 400, message Bad request version ('Pmz\x89#<Z@')
+2025-07-10 11:19:14,324 [ERROR] 127.0.0.1 - - [10/Jul/2025 11:19:14] code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00\x1b\x00\x03\x02\x00\x02\x00')
+2025-07-10 11:19:24,969 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-10 11:19:24,969 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-10 11:19:24,970 [INFO] Added job "check_task_deadlines" to job store "default"
+2025-07-10 11:19:24,970 [INFO] Added job "backup_database" to job store "default"
+2025-07-10 11:19:24,970 [INFO] Scheduler started
+2025-07-10 11:19:24,981 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-07-10 11:19:24,982 [INFO] [33mPress CTRL+C to quit[0m
+2025-07-10 11:19:26,141 [ERROR] 127.0.0.1 - - [10/Jul/2025 11:19:26] code 400, message Bad request version ('localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00\x12\x00\x00\x00+\x00\x07\x06')
+2025-07-10 11:21:13,066 [INFO] 127.0.0.1 - - [10/Jul/2025 11:21:13] "[32mGET /tasks HTTP/1.1[0m" 301 -
+2025-07-10 11:21:27,693 [INFO] 127.0.0.1 - - [10/Jul/2025 11:21:27] "[32mGET / HTTP/1.1[0m" 301 -
+2025-07-10 11:21:27,706 [ERROR] 127.0.0.1 - - [10/Jul/2025 11:21:27] code 400, message Bad request version ('\x02h2\x08http/1.1\x00+\x00\x07\x06\x1a\x1a\x03\x04\x03\x03\x00')
+2025-07-10 11:21:51,692 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-10 11:21:51,692 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-10 11:21:51,693 [INFO] Added job "check_task_deadlines" to job store "default"
+2025-07-10 11:21:51,693 [INFO] Added job "backup_database" to job store "default"
+2025-07-10 11:21:51,693 [INFO] Scheduler started
+2025-07-10 11:21:51,705 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-07-10 11:21:51,706 [INFO] [33mPress CTRL+C to quit[0m
+2025-07-10 11:21:54,624 [ERROR] 127.0.0.1 - - [10/Jul/2025 11:21:54] code 400, message Bad request version ('\x02h2\x08http/1.1\x00')
+2025-07-10 11:21:54,627 [ERROR] 127.0.0.1 - - [10/Jul/2025 11:21:54] code 400, message Bad request version ('\x11')
+2025-07-10 11:22:41,943 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-10 11:22:41,944 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-10 11:22:41,944 [INFO] Added job "check_task_deadlines" to job store "default"
+2025-07-10 11:22:41,945 [INFO] Added job "backup_database" to job store "default"
+2025-07-10 11:22:41,945 [INFO] Scheduler started
+2025-07-10 11:22:41,956 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-07-10 11:22:41,957 [INFO] [33mPress CTRL+C to quit[0m
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "check_task_deadlines" to job store "default"
+INFO:apscheduler.scheduler:Added job "backup_database" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:24:43] code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01ÿ\x01\x00\x01\x00\x00')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:24:43] "[31m[1m\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03"3gG¶Ä\x87à~üv\x8d/\x03+ï\x9f[\x97¾òÙåÓf7\x99\x15Ce\x86\x99 Hþî>\x8c`\x00 \x0fÌ\x9bv;Át \x93\x95 Ùç\x06µKÇ5/z+Âoç\x00 úú\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06SÊÊ\x00\x00þ\x0d\x00Ú\x00\x00\x01\x00\x01P\x00 <ß¬$7\x83\x1cl\x00x¼\x81ÿ>?|Ðý6=²òÕª\x10C\x8fHÍ5öX\x00°võ=\x9a\x1a\x0c\x0d!$\\à\x8b¯SÛSD\x99Ò³à\x0eÖæzÐ\x0eT\x1dÏê\x97}\x135é\x07ÝXVÅ=ôaCÎY¯\x0e_Òú\x18qÞ\x161_\x9bcuK\x9a\x19­'\x8c\x91\x90Uò& =mù½õ=]¸Év·§f\x9eC\x12\x96\x9d\x9c¹ØyÎéìõ}¿*H8ñ\x10ròOèS3:\x9f2\x95\x04\x03f\x88ì7\x8e\x95=WÄ¿\x96E/Ô¶ûË,38\x09­aÖ&@ºý\x87P¦\x94µe\x07OÄ\x04\x01\x08d·\x08\x9fhI±æL\x10èzóK\x92¡\x8fk\x00\x0d\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01ÿ\x01\x00\x01\x00\x00[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:24:43] code 400, message Bad request version ("g'p\x806ÁÔ@Å²")
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:24:43] "[31m[1m\x16\x03\x01\x07\x00\x01\x00\x06ü\x03\x03\x19*\x1dõ~úP\x8fè\x8c¸\x08 \x13.4<\x16Ç µj?¨pýº\x02+Xè¶ \x8b\x0f\x92\x8càc)\x8dyN©¶\x1deî(*¸\x94\x85½>å\x81\x02\x7f´\x9b:>yV\x00 ÊÊ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06\x93ÊÊ\x00\x00þ\x0d\x01\x1a\x00\x00\x01\x00\x01Ç\x00 g'p\x806ÁÔ@Å²[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:24:43] code 400, message Bad request version ('él\x99!K\x8a\x86±Q\\¤*#L\x01m\x0570FU')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:24:43] "[31m[1m\x16\x03\x01\x06 \x01\x00\x06\x9c\x03\x030>_ÛåÍ\x8a3\x06«l]ª\x0c\x1e$\x10C$\x1e²F}EqæÅÏÏØ2\x06 7ïÊ9È%\x10ÖhÆ0¨!^\x8bÜ\x1b\x91½Ã\x00Ú\x9e%\x13\x9dmñ\x1bÆp\x97\x00 \x1a\x1a\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063ZZ\x00\x00\x00\x1b\x00\x03\x02\x00\x02\x00\x17\x00\x00\x00\x0d\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x003\x04ï\x04í::\x00\x01\x00\x11ì\x04ÀÐ¦\x8fù#'\x883!õÜ\x81:b¦\x95Ñ\x81îÂ'à\x1az\x881\x9d\x89'©»³'%á<Ü @\x93Ò.ÿam\x8cä<äô\x8c$àZ£\x80\x02 \x87.\x969\x11ölÌ:j\x9aÎæÆ¨±\x98\x17#1«4´³Ù¶¬4\x8dÁ\x00M,ågDá8ð*»C\x8c¸Ö\x19´´Ó\x17\x8d¡\x96d\x01\x86°¨IÚ\x06Ð°zMÇi<\x16YOô\x94\x09_&\x85\x10 såqhÎJ$K\x10z\x9d\x84[­Ö´\x1b\x8a_o!3ÀØ¢\x183\x1cq\x16b&²ªO\x14 él\x99!K\x8a\x86±Q\\¤*#L\x01m\x0570FU[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:24:43] code 400, message Bad request version ('Z\x9b')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:24:43] "[31m[1m\x16\x03\x01\x06 \x01\x00\x06\x9c\x03\x039Lð/P´\x97\x1e\x8e\x94\x9a{\x06çÊ®¡n\x02iA©Å\x0bYM\x82\x87l´Â\x81 5/o¨ Ö&b\x81ÛJÀÞ\x14{½âàÇã¹\x07\x01\x8aÀ\x9d¯Ô\x9a\x188/\x00 ::\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063zz\x00\x00\x00+\x00\x07\x06ÚÚ\x03\x04\x03\x03ÿ\x01\x00\x01\x00\x003\x04ï\x04í\x1a\x1a\x00\x01\x00\x11ì\x04ÀÅp¬m,\x0b;\\ÂÿHÏ·Y~\x0bl\x1d!»0RáF4\x86¾¾±1ñtIdxAÏ\x9b|d¬\x92R\x83ÆV<lµ©^\x038>ÓF¨7\x15°@AÂ\x9f\x15i\x7f\x81\x9bUñyeÈ`\x1c\x12»]Ç6Ù\x89/\x14A7¥&gÒÒ0\x9bdR\x9a 8Å\x12\x8b$X6hT.\x1cZ\x9b\x0c[0m" 400 -
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:25:15] "[32mGET / HTTP/1.1[0m" 301 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:25:15] code 400, message Bad request syntax ('\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03cñ\x16fÐJÑÉ¿P\\¹ødà±O"jX¥R²¥')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:25:15] "[31m[1m\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03cñ\x16fÐJÑÉ¿P\\¹ødà±O"jX¥R²¥[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:25:15] code 400, message Bad request version ('\x8fõ+þI\x06\x05\x04')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:25:15] "[31m[1m\x16\x03\x01\x06 \x01\x00\x06\x9c\x03\x03ÍÄ\x9bø\x86\x85%?A¨Qi×\x1br}õ\x8dyl&ö\x04-¼l\x996|(\x08t Ì\x0dÅ&éÐyf6¶³\x16!°¿\x06ø\x02qH\x96\x8e,\x19M\x05\\6Æú\\y\x00 \x9a\x9a\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063zz\x00\x00\x003\x04ï\x04íÚÚ\x00\x01\x00\x11ì\x04Àv\x09\x01\x09Ì\x038zB9\x8bVRÀ·à\x91²´¥\x9d\x85 \x07ÀÒÉ\x91ç\x05»,\x13å¡Nó¢7õc(¸eR²\x073ª\x95$²chï´\x0eöós¶´:\x0eAÄúº\x97hfÁl$\x93\x04sUWõ,Ë;5\x8bq7o\x88\x9fããR\x04\x8aÈäe,|üA :\x11²×Ã\x88:¿ZÂ\x97J\x81ªÙ\x94\x9d\x0d\x85\x8f\x0c¤\x06ö"\x1a¬Øj\\\x97!ÎÉOçT5f\x8b\x86\x00X\x12\x18\x09É\x97Ù\x9b`ÔM\x91\x1c\x00Ä%%6Y\x91\\\x17$PÚ\x82¯[o`¨6'V©\x80XÅI»\x04¢\x11rw9Á®qx\x8b\x89N0\x97\x07\x0d \x99%,J\x8b \x15R\x9c<Y58Q\x1c\x1b»:\x90\x87Å\x8b\x8bÊ\x05!y[Öl\x92D#&Úk¯5\x11vtZU§\x80 \x8fõ+þI\x06\x05\x04[0m" 400 -
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:25:18] "[32mGET / HTTP/1.1[0m" 301 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:25:18] code 400, message Bad request syntax ('\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03äÉrµF»Ç:âZ\x8e¶\x11×ç\x11_\x9cï\x1aë\x05r\x99u\x90')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:25:18] "[31m[1m\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03äÉrµF»Ç:âZ\x8e¶\x11×ç\x11_\x9cï\x1aë\x05r\x99u\x90[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:25:18] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x07\x00\x01\x00\x06ü\x03\x03*\x0fØ`,d\x88¼ÜÆ%µ²ä\x80\x8f>FÂÕ¿²Lq\x94ìx.,Gí.')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:25:18] "[31m[1m\x16\x03\x01\x07\x00\x01\x00\x06ü\x03\x03*\x0fØ`,d\x88¼ÜÆ%µ²ä\x80\x8f>FÂÕ¿²Lq\x94ìx.,Gí. \x13\x13ÙyÅ\x00%÷¾ÛBÑu+[0m" 400 -
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:31:48] "[32mGET / HTTP/1.1[0m" 301 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:31:48] code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:31:48] "[31m[1m\x16\x03\x01\x06à\x01\x00\x06Ü\x03\x032í\x90áþÔ¡òEzäÂ\x852³I\x1d\x93ê8\x03L\x12þC\x93ÅÄ\x1an\x0dâ Z4 fÎ(ß­§!i°+Ó\x87ÁáO\x14½°-ÝvÒÍ\x1c`Ï Ë\x83\x00 zz\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06s\x9a\x9a\x00\x00\x00\x0b\x00\x02\x01\x00\x00\x12\x00\x00DÍ\x00\x05\x00\x03\x02h2\x00\x10\x00\x0e\x00\x0c\x02h2\x08http/1.1\x00+\x00\x07\x06ÊÊ\x03\x04\x03\x03ÿ\x01\x00\x01\x00\x00\x17\x00\x00\x00\x0d\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:31:48] code 400, message Bad request version ('::\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06s')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:31:48] "[31m[1m\x16\x03\x01\x06à\x01\x00\x06Ü\x03\x03ï>\x03\x93Y!Mí\x95~6ì\x1a%06,éVK\x00\x97>£\x1eA\x0c+«;gû -\x06`N\x87Ù=f\x81æð7ÊhÔ«½ý_ãØrGMK| Á¹:)Ø\x00 ::\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06s[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:31:50] code 400, message Bad request version ('ù\x82\x86ri')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:31:50] "[31m[1m\x16\x03\x01\x06 \x01\x00\x06\x9c\x03\x03»Tî#cPWO\x1b\x1fí\x8f­ÆÎ$iè\x15ð\x80\x0e\x85·Çlø¡Ð{\x8eò åZÄ-Ïø\x81!¯\x1eù\x82\x86ri[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:31:50] code 400, message Bad request version ('\x02h2\x08http/1.1\x00')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:31:50] "[31m[1m\x16\x03\x01\x07\x00\x01\x00\x06ü\x03\x03MlZ\x0b~\x03Ïm\x83ö2\x14³©,)Ðøësc2V¿8Ïà4\x9e\x13\x03Ê æ¡\x10×%\x90ÑaIu\x8d;D©­|_É·\x88VêÐ¤Ñ\x93ã\x05, \x8a\x11\x00 ºº\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06\x93ZZ\x00\x00\x00-\x00\x02\x01\x01\x00\x0d\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00\x0b\x00\x02\x01\x00þ\x0d\x01\x1a\x00\x00\x01\x00\x01â\x00 që\x0d?þÆî\x88´ïc,vW\x9eÜ>¤³7\\$\x85EÈN¸È\x04ç\x7f\x06\x00ð\x8aÅ¡vdï2\x95~¡\x90Î\x053\x8aµR¡\x9f\x9a:»¹\x9d^¶©\x95\x95©"?-><ß[ó\x1d\x98j<\x9bç60\x02¢à\x10K1L\x04\x10\x02M9D¥£å\x0bö\x1e\x0fÁ·\x90¢ÞÃ^+T¡ÿ\x0biºé\x83'ïpÐX`øñ1e\x90HI\x1c\x02*Z\x80I\x03Ä#câr'{¦\x1cÆªÛ³Í}ËÞóÇÓõàÐ¢\x98?â\x802\x1bXÆ\x92ãÝOÔ\x97ÿ5rÛH{táÓ\x9aQ\x0d¬Í\x1c,ú{X\x8b;|ö¸_­§ÇrZ²Õ+FÜHþNØw\x8a`\x10½Qõeð2á\x12;GàyÇâ»\x18½\x9e\x93i(\x8aè[\x85 2\x86+\x9ad\x7f/ª\x97g¡Ó\x88\x12 ïö½å¿¹\x928©\x1aõ\x06àÕAy\x00#\x00\x00\x00\x17\x00\x00\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00\x10\x00\x0e\x00\x0c\x02h2\x08http/1.1\x00[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:31:53] code 400, message Bad request version ('\x00\x02\x01\x00\x00-\x00\x02\x01\x01\x00#\x00\x00\x00+\x00\x07\x06zz\x03\x04\x03\x03\x00\x05\x00\x05\x01\x00\x00\x00\x00DÍ\x00\x05\x00\x03\x02h2\x00')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:31:53] "[31m[1m\x16\x03\x01\x06à\x01\x00\x06Ü\x03\x03{\x80¶kià\x84\x0ej¼ÏX¶\x9fì\x9f\x8a(¬\x0dÎ\x8då±¢ÖË­\x9aëlm ©¨ý\x0c\x98¬º:\x04I/k`¡a¦w\x07O\x0f\x8fq\x81%á á¨7\x14Çð\x00 jj\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06sÚÚ\x00\x00\x00\x1b\x00\x03\x02\x00\x02\x00\x12\x00\x00\x00\x0b\x00\x02\x01\x00\x00-\x00\x02\x01\x01\x00#\x00\x00\x00+\x00\x07\x06zz\x03\x04\x03\x03\x00\x05\x00\x05\x01\x00\x00\x00\x00DÍ\x00\x05\x00\x03\x02h2\x00[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:31:53] code 400, message Bad request version ('\x10@M\x00')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:31:53] "[31m[1m\x16\x03\x01\x06à\x01\x00\x06Ü\x03\x03H£Ø2[0·Ü:ä½Î\x89%R\x8a¿\x19à\x13ª\x9f@yò7+Ò\x0e¿Æ¾ P\x0evu\x9e|\x04öi\x8a£\x87«\x7f\x82TÅØ\x03Ic\x1aÔ\x14iÖ\x93F \x10@M\x00 [0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:31:57] code 400, message Bad request version ('ÙýuW6Æ,\x0e\x96D±±')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:31:57] "[31m[1m\x16\x03\x01\x06 \x01\x00\x06\x9c\x03\x03ÉÉ\x92Ä¿¶g]1&\x7flcO\x0bw\x01mÁ~~ \x07íÑ¶\x7f\x1aE8.\x08 s\x84¬èÓv\x17+\x94Ú¬\x91hÈ-³*K"s;ØI\x13yæ\x98Ò\x09\x02¨y\x00 ÊÊ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063\x8a\x8a\x00\x00DÍ\x00\x05\x00\x03\x02h2\x00\x12\x00\x00þ\x0d\x00º\x00\x00\x01\x00\x018\x00 ÙDô\x1aèl\x0f\x06Ù2:_\x07\x86\x85\x83´\x1dÙýuW6Æ,\x0e\x96D±±[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:31:57] code 400, message Bad request version ('K\x08¥ý+ÇAnìB|{\x91Ý\x8b\x04H\x00#\x00\x00\x00\x17\x00\x00\x00')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:31:57] "[31m[1m\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03Y\x80\x87\x1bmo\x15\x18K©ç{Æ×\x16å?Ë\x19¹¢{@|î{¥îñÄ-x ÀÁ\x9eð@­;\x16+*\x03\x90XR\x8fDàª±t\x11Ó\x16\x9eÔÀ\x8b\x0f·\x7f\x18%\x00 jj\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06SZZ\x00\x00\x00\x0d\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00\x0b\x00\x02\x01\x00\x00\x1b\x00\x03\x02\x00\x02DÍ\x00\x05\x00\x03\x02h2\x00-\x00\x02\x01\x01\x00+\x00\x07\x06\x9a\x9a\x03\x04\x03\x03\x00\x05\x00\x05\x01\x00\x00\x00\x00þ\x0d\x00Ú\x00\x00\x01\x00\x01j\x00 UÙ~B\x0eô¾±T\x88\x0d×'b\x0dÓE¨C\x0bìò9\x94è@®2]\x1a\x9eN\x00°ußùÛ{ÁÚ\x87¨\x13Õ\x8f\x90È~×j?â\x06{å\x08\x0e\x8a»ëÁ5ñqÎÁ\x82;1ìÛ\x9dÎ?\x91\x99Ïf\x95\x14ÔÅ}\x1fÊR\x86]\x04xk\x07ÑU\x87§ëW\x8aRí:t4Î)\x10LûiÒÏ\x85\x99\x944Dí\x97Ì¢Þ?WÁ\x97zùè#72T5ëpn)\x8b\x18\x923@ÝB\x04ÀÔ\x90¨\x95\x0cN\x8bR\x11\x044\x8b\x14\x03[b\x90Q\x87!²°Í´àlë1¸\x88cXûÃ¹U\\Bû^NCÏ\x85\x85K\x08¥ý+ÇAnìB|{\x91Ý\x8b\x04H\x00#\x00\x00\x00\x17\x00\x00\x00[0m" 400 -
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "check_task_deadlines" to job store "default"
+INFO:apscheduler.scheduler:Added job "backup_database" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:34:41] "[32mGET / HTTP/1.1[0m" 301 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:34:41] code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:34:41] "[31m[1m\x16\x03\x01\x06à\x01\x00\x06Ü\x03\x03CÒq\x96L2æ7p\x86\x97¿õÈ+öp\\÷µ\x87'ÑC÷\x1bh\x84\x0dFâZ ¦kH\x1e\x00úSu\x13v\x1cöNºq%·¬r§UÍG\x80ß«\x15©\x96Î#M\x00 ZZ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06súú\x00\x00\x00\x0d\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:34:41] code 400, message Bad request version ('\x81°Ç\x89\x8br&å\x8fº\x10Æ-')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:34:41] "[31m[1m\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03,ÝCd\x85\x83\x10 áÕ#RUu§á>ç\x9f4¡³`g\x07\x96o6v\x13\x01\x07 \x81°Ç\x89\x8br&å\x8fº\x10Æ-[0m" 400 -
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:34:50] "[32mGET / HTTP/1.1[0m" 301 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:34:50] code 400, message Bad request version ('D¹\x08\x15\x0f\x11')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:34:50] "[31m[1m\x16\x03\x01\x06à\x01\x00\x06Ü\x03\x03Km6×¡\x8aJ\x95\x95\x1d¼8\x82H7=÷\x13r(|f\x1fD¹\x08\x15\x0f\x11[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:34:50] code 400, message Bad request version ('1\x10z7¾\x8f1v¢ý²\x07«ï¡+l\x11Ó\x00')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:34:50] "[31m[1m\x16\x03\x01\x07\x00\x01\x00\x06ü\x03\x03n\\Öàû\x1eQj\x7f\x05Ê×\x80Ì¡3ßñE\x1dÌ?£\x00\x91_§£~frM <æÀ+}§¥ÿ"Êß\x87 1\x10z7¾\x8f1v¢ý²\x07«ï¡+l\x11Ó\x00 [0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:35:54] code 400, message Bad request version ('ªª\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06s::\x00\x00\x00')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:35:54] "[31m[1m\x16\x03\x01\x06à\x01\x00\x06Ü\x03\x03\x9c¿A\x80×}1ÀÅB×ù7æ(áH7²òÍAÌO\x0f\x7fäÚÍ1\x9cí k\x93¼*Ý\x18\\`(¸üuþ\x8d]\x0etßò5À"ÿd;{ÃÕ\x1d¼\x0bÔ\x00 ªª\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06s::\x00\x00\x00[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:35:54] code 400, message Bad request version ('\x02h2\x08http/1.1\x00')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:35:54] "[31m[1m\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03(Y\x19\x97á\x1aüb[\x06÷\x11\\qk)¼\x19\x19VG[ßd)Î;\x1fq,hI ­N\x99»ð2ÿéÎµÂ7SÇ[\x94\x1c`/s\x98\x9cqÊÑÚºñçì×\x0d\x00 ºº\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06Súú\x00\x00\x00\x05\x00\x05\x01\x00\x00\x00\x00ÿ\x01\x00\x01\x00\x00\x1b\x00\x03\x02\x00\x02þ\x0d\x00Ú\x00\x00\x01\x00\x01ï\x00 0ñ\x0b¦j^\x89Õ{`\x18Ù\x8c~ÈÝ¸´ØmðVgò×\x7fdpß£C\x1b\x00°\x94×R\x9di\x96\x91\x00¡åý\x1a¢}\x9b¦Zò-\x16ç-ì\x87ÁÈ Ý`ÿQ\x8d2£ßé\x00\x04äi©\x01÷\x13×S\x01F{øò¥Ñ\x8aA\x7f3\x08\x9fïºP\x1c\x13JªÄ°é\x1aàf\x85~à»ÞEP\x95\x84Ì¾\x91öÃè\x16^U=tóÂH\x19»¯eTVT\x0c¢Üø\x94B\x1fRý\x0f\x01tw¾F1°v¾\x04-\x14\x91:\x14\x88\x80aõm\x98\x1bº[+a\x8cÃ<©\x81+5§Çl¾Y Ì\x05\x1eÓÃ(k\x8b\x7fÆáP`GÌ×¸Cf\x9fr\x9dYòý\x00\x12\x00\x00\x00\x0b\x00\x02\x01\x00\x00\x17\x00\x00\x00-\x00\x02\x01\x01\x00\x10\x00\x0e\x00\x0c\x02h2\x08http/1.1\x00[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:35:54] code 400, message Bad request version ('7D\x15öA>ÅYHó\x02ÞÄ]«f~ðQ¬1Ú')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:35:54] "[31m[1m\x16\x03\x01\x07\x00\x01\x00\x06ü\x03\x03ük\x99\x99ëÝÞi\x12²òÏR4õµÓ'¹"î\x89[æ4o'"n%^\x98 XTC+×²\x18fD\x96Åu\x965-,(r¿¯\x1eÊâ¡ööÿ6ãÈØF\x00 ::\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06\x93\x8a\x8a\x00\x00\x00\x17\x00\x00\x00\x0b\x00\x02\x01\x00DÍ\x00\x05\x00\x03\x02h2\x00#\x00\x00\x003\x04ï\x04í\x9a\x9a\x00\x01\x00\x11ì\x04À;c\x0bÂä¿µa\x81:\x03¿×\x98ÄÜÁ¦\x9a«4ÿ'\x07Üw$ %¿ª\x18­\x97§N ú\x17kj"T{\x0bx\x8c\x15\x05\x1c\x9c<èM\x97ÔÁ?¤}^A\x05<\x99¬\x0b7D\x15öA>ÅYHó\x02ÞÄ]«f~ðQ¬1Ú[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:35:54] code 400, message Bad request version ('ZZ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06S::\x00\x00\x003\x04ï\x04íZZ\x00\x01\x00\x11ì\x04À')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:35:54] "[31m[1m\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03k\x95F\x12\x13¿\x17ß';âþª¨\x01ê\x11û\x9dÈúG\x88GÄ¤\x12\x9cjWï\x80 \x03ã(bÝÂ>¯XkÓ\x09ÅW)£S !·c7Yð\x99Ä\x18\x113ä\x92_\x00 ZZ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06S::\x00\x00\x003\x04ï\x04íZZ\x00\x01\x00\x11ì\x04À[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:35:55] code 400, message Bad request version ('\x15r.<\x95ñc£\x98\x94>bLaB<jd\x05x{¹ÃÆ&+\x19\x13\x18h»¡ÆålÅÌ')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:35:55] "[31m[1m\x16\x03\x01\x07\x00\x01\x00\x06ü\x03\x03·#<§ÚÿÆ¬SâÐ\x82ÃdUSUÏvGH\x87²ÙâzfÅß\x82¼µ \x85Í\x1eQÆm'y}Î¥\x8bÀ¨Æ\x0f\x05½(ô$ÒÖ\x18åñ»G\x1b\\c\x91\x00 **\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06\x93\x9a\x9a\x00\x00\x00\x0d\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x003\x04ï\x04ízz\x00\x01\x00\x11ì\x04ÀwzOeàDßÈvàB£Ø\x96°ËYa1µzÆ\x9a\x9bÞf|c9\x86\x1f\x15r.<\x95ñc£\x98\x94>bLaB<jd\x05x{¹ÃÆ&+\x19\x13\x18h»¡ÆålÅÌ[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:35:55] code 400, message Bad request version ('À')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:35:55] "[31m[1m\x16\x03\x01\x06 \x01\x00\x06\x9c\x03\x03U\x84\x197&\x05\x05Å\x17È¨\x89ÿìä1vþYPÔ\x8c¾O\x05$sKVU\x80v áà²ô¨5R\x0dÀ[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:35:55] code 400, message Bad request version ('\x02h2\x08http/1.1\x00#\x00\x00\x00')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:35:55] "[31m[1m\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03çèq&\x12Ý6²ÁºÉÑgB»~X~=öKZD÷Õ\x84\x1c\x025%>\x97 Q8+á08åRqaÊ:V*C\x99º¤,3g\x01#Û\x05BÄ"ö_\x9c\x0d\x00 JJ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06SZZ\x00\x00\x00\x12\x00\x00\x00+\x00\x07\x06::\x03\x04\x03\x03\x00\x10\x00\x0e\x00\x0c\x02h2\x08http/1.1\x00#\x00\x00\x00[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [10/Jul/2025 11:35:55] code 400, message Bad request version ('7é@\x9f°Yáõ\x10\x88\x06g)AÆ\x9cÑ¾\x0e¨\x9bá¾\x11í\x902')
+INFO:werkzeug:127.0.0.1 - - [10/Jul/2025 11:35:55] "[31m[1m\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03ò\x11öé<ÿµ»ÖMû\x94\x84\x05\x0e¶@¤"dªQ \x0bPÑµýíWøN 7é@\x9f°Yáõ\x10\x88\x06g)AÆ\x9cÑ¾\x0e¨\x9bá¾\x11í\x902[0m" 400 -
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "check_task_deadlines" to job store "default"
+INFO:apscheduler.scheduler:Added job "backup_database" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+2025-07-10 12:03:22,555 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-10 12:03:22,556 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-10 12:03:22,556 [INFO] Added job "check_task_deadlines" to job store "default"
+2025-07-10 12:03:22,556 [INFO] Added job "backup_database" to job store "default"
+2025-07-10 12:03:22,557 [INFO] Scheduler started
+2025-07-10 12:03:22,571 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-07-10 12:03:22,572 [INFO] [33mPress CTRL+C to quit[0m
+2025-07-10 12:03:22,579 [INFO]  * Restarting with watchdog (windowsapi)
+2025-07-10 12:03:26,259 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-10 12:03:26,260 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-10 12:03:26,260 [INFO] Added job "check_task_deadlines" to job store "default"
+2025-07-10 12:03:26,262 [INFO] Added job "backup_database" to job store "default"
+2025-07-10 12:03:26,262 [INFO] Scheduler started
+2025-07-10 12:03:26,275 [WARNING]  * Debugger is active!
+2025-07-10 12:03:26,281 [INFO]  * Debugger PIN: 978-448-647
+2025-07-10 12:03:48,740 [INFO] 127.0.0.1 - - [10/Jul/2025 12:03:48] "[32mGET / HTTP/1.1[0m" 302 -
+2025-07-10 12:04:25,102 [INFO] 127.0.0.1 - - [10/Jul/2025 12:04:25] "[32mGET / HTTP/1.1[0m" 302 -
+2025-07-10 12:04:28,586 [INFO]  * Detected change in 'C:\\Users\\Keken\\AppData\\Roaming\\Python\\Python311\\site-packages\\flask\\templating.py', reloading
+2025-07-10 12:04:28,587 [INFO]  * Detected change in 'C:\\Users\\Keken\\AppData\\Roaming\\Python\\Python311\\site-packages\\jinja2\\environment.py', reloading
+2025-07-10 12:04:28,588 [INFO]  * Detected change in 'C:\\Users\\Keken\\AppData\\Roaming\\Python\\Python311\\site-packages\\jinja2\\loaders.py', reloading
+2025-07-10 12:04:28,606 [INFO] 127.0.0.1 - - [10/Jul/2025 12:04:28] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+2025-07-10 12:04:29,892 [INFO]  * Restarting with watchdog (windowsapi)
+2025-07-10 12:04:33,761 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-10 12:04:33,923 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-10 12:04:33,924 [INFO] Added job "check_task_deadlines" to job store "default"
+2025-07-10 12:04:33,925 [INFO] Added job "backup_database" to job store "default"
+2025-07-10 12:04:33,925 [INFO] Scheduler started
+2025-07-10 12:04:33,937 [WARNING]  * Debugger is active!
+2025-07-10 12:04:33,942 [INFO]  * Debugger PIN: 978-448-647
+2025-07-10 12:28:31,401 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-10 12:28:31,402 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-10 12:28:31,402 [INFO] Added job "check_task_deadlines" to job store "default"
+2025-07-10 12:28:31,403 [INFO] Added job "backup_database" to job store "default"
+2025-07-10 12:28:31,403 [INFO] Scheduler started
+2025-07-10 12:28:31,417 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-07-10 12:28:31,418 [INFO] [33mPress CTRL+C to quit[0m
+2025-07-10 12:28:31,424 [INFO]  * Restarting with watchdog (windowsapi)
+2025-07-10 12:28:34,370 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-10 12:28:34,371 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-10 12:28:34,371 [INFO] Added job "check_task_deadlines" to job store "default"
+2025-07-10 12:28:34,371 [INFO] Added job "backup_database" to job store "default"
+2025-07-10 12:28:34,372 [INFO] Scheduler started
+2025-07-10 12:28:34,383 [WARNING]  * Debugger is active!
+2025-07-10 12:28:34,388 [INFO]  * Debugger PIN: 978-448-647
+2025-07-10 12:28:47,574 [INFO] 127.0.0.1 - - [10/Jul/2025 12:28:47] "[32mGET / HTTP/1.1[0m" 302 -
+2025-07-10 12:28:47,604 [INFO] 127.0.0.1 - - [10/Jul/2025 12:28:47] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+2025-07-10 12:28:49,777 [INFO] 127.0.0.1 - - [10/Jul/2025 12:28:49] "[32mGET / HTTP/1.1[0m" 302 -
+2025-07-10 12:28:49,808 [INFO] 127.0.0.1 - - [10/Jul/2025 12:28:49] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+2025-07-10 12:28:49,887 [INFO] 127.0.0.1 - - [10/Jul/2025 12:28:49] "GET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-07-10 12:28:49,887 [INFO] 127.0.0.1 - - [10/Jul/2025 12:28:49] "GET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-07-10 12:28:49,928 [INFO] 127.0.0.1 - - [10/Jul/2025 12:28:49] "GET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-07-10 12:28:50,062 [INFO] 127.0.0.1 - - [10/Jul/2025 12:28:50] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:30:00,990 [INFO] 127.0.0.1 - - [10/Jul/2025 12:30:00] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+2025-07-10 12:30:01,024 [INFO] 127.0.0.1 - - [10/Jul/2025 12:30:01] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:30:01,028 [INFO] 127.0.0.1 - - [10/Jul/2025 12:30:01] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-07-10 12:30:01,087 [INFO] 127.0.0.1 - - [10/Jul/2025 12:30:01] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:30:01,130 [INFO] 127.0.0.1 - - [10/Jul/2025 12:30:01] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:30:02,295 [INFO] 127.0.0.1 - - [10/Jul/2025 12:30:02] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+2025-07-10 12:30:02,326 [INFO] 127.0.0.1 - - [10/Jul/2025 12:30:02] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:30:02,329 [INFO] 127.0.0.1 - - [10/Jul/2025 12:30:02] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-07-10 12:30:02,377 [INFO] 127.0.0.1 - - [10/Jul/2025 12:30:02] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:30:02,415 [INFO] 127.0.0.1 - - [10/Jul/2025 12:30:02] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:30:02,732 [INFO] 127.0.0.1 - - [10/Jul/2025 12:30:02] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+2025-07-10 12:30:02,761 [INFO] 127.0.0.1 - - [10/Jul/2025 12:30:02] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:30:02,763 [INFO] 127.0.0.1 - - [10/Jul/2025 12:30:02] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-07-10 12:30:02,790 [INFO] 127.0.0.1 - - [10/Jul/2025 12:30:02] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:30:02,825 [INFO] 127.0.0.1 - - [10/Jul/2025 12:30:02] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:31:14,300 [INFO] 127.0.0.1 - - [10/Jul/2025 12:31:14] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+2025-07-10 12:31:14,335 [INFO] 127.0.0.1 - - [10/Jul/2025 12:31:14] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:31:14,338 [INFO] 127.0.0.1 - - [10/Jul/2025 12:31:14] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-07-10 12:31:14,390 [INFO] 127.0.0.1 - - [10/Jul/2025 12:31:14] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:31:14,430 [INFO] 127.0.0.1 - - [10/Jul/2025 12:31:14] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:32:57,852 [INFO] 127.0.0.1 - - [10/Jul/2025 12:32:57] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+2025-07-10 12:32:57,884 [INFO] 127.0.0.1 - - [10/Jul/2025 12:32:57] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:32:57,889 [INFO] 127.0.0.1 - - [10/Jul/2025 12:32:57] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-07-10 12:32:57,943 [INFO] 127.0.0.1 - - [10/Jul/2025 12:32:57] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:32:57,981 [INFO] 127.0.0.1 - - [10/Jul/2025 12:32:57] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:33:03,066 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:03] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+2025-07-10 12:33:03,098 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:03] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:33:03,102 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:03] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-07-10 12:33:03,148 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:03] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:33:03,189 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:03] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:33:04,278 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:04] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+2025-07-10 12:33:04,304 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:04] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:33:04,310 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:04] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-07-10 12:33:04,336 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:04] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:33:04,376 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:04] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:33:07,590 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:07] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+2025-07-10 12:33:07,614 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:07] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:33:07,622 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:07] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-07-10 12:33:07,671 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:07] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:33:07,711 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:07] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:33:08,062 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:08] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+2025-07-10 12:33:08,089 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:08] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:33:08,091 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:08] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-07-10 12:33:08,116 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:08] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:33:08,157 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:08] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:33:55,600 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:55] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+2025-07-10 12:33:55,630 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:55] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:33:55,632 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:55] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-07-10 12:33:55,685 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:55] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:33:55,726 [INFO] 127.0.0.1 - - [10/Jul/2025 12:33:55] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:34:58,232 [INFO] 127.0.0.1 - - [10/Jul/2025 12:34:58] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+2025-07-10 12:34:58,263 [INFO] 127.0.0.1 - - [10/Jul/2025 12:34:58] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:34:58,269 [INFO] 127.0.0.1 - - [10/Jul/2025 12:34:58] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-07-10 12:34:58,321 [INFO] 127.0.0.1 - - [10/Jul/2025 12:34:58] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:34:58,361 [INFO] 127.0.0.1 - - [10/Jul/2025 12:34:58] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:34:59,848 [INFO] 127.0.0.1 - - [10/Jul/2025 12:34:59] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+2025-07-10 12:34:59,876 [INFO] 127.0.0.1 - - [10/Jul/2025 12:34:59] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:34:59,878 [INFO] 127.0.0.1 - - [10/Jul/2025 12:34:59] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-07-10 12:34:59,903 [INFO] 127.0.0.1 - - [10/Jul/2025 12:34:59] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:34:59,944 [INFO] 127.0.0.1 - - [10/Jul/2025 12:34:59] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:35:47,735 [INFO] 127.0.0.1 - - [10/Jul/2025 12:35:47] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+2025-07-10 12:35:47,762 [INFO] 127.0.0.1 - - [10/Jul/2025 12:35:47] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:35:47,768 [INFO] 127.0.0.1 - - [10/Jul/2025 12:35:47] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-07-10 12:35:47,819 [INFO] 127.0.0.1 - - [10/Jul/2025 12:35:47] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:35:47,863 [INFO] 127.0.0.1 - - [10/Jul/2025 12:35:47] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:36:22,362 [INFO] 127.0.0.1 - - [10/Jul/2025 12:36:22] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+2025-07-10 12:36:22,397 [INFO] 127.0.0.1 - - [10/Jul/2025 12:36:22] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:36:22,401 [INFO] 127.0.0.1 - - [10/Jul/2025 12:36:22] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-07-10 12:36:22,454 [INFO] 127.0.0.1 - - [10/Jul/2025 12:36:22] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:36:22,497 [INFO] 127.0.0.1 - - [10/Jul/2025 12:36:22] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:36:22,996 [INFO] 127.0.0.1 - - [10/Jul/2025 12:36:22] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+2025-07-10 12:36:23,022 [INFO] 127.0.0.1 - - [10/Jul/2025 12:36:23] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:36:23,027 [INFO] 127.0.0.1 - - [10/Jul/2025 12:36:23] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-07-10 12:36:23,052 [INFO] 127.0.0.1 - - [10/Jul/2025 12:36:23] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:36:23,093 [INFO] 127.0.0.1 - - [10/Jul/2025 12:36:23] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:36:24,502 [INFO] 127.0.0.1 - - [10/Jul/2025 12:36:24] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+2025-07-10 12:36:24,525 [INFO] 127.0.0.1 - - [10/Jul/2025 12:36:24] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:36:24,527 [INFO] 127.0.0.1 - - [10/Jul/2025 12:36:24] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-07-10 12:36:24,576 [INFO] 127.0.0.1 - - [10/Jul/2025 12:36:24] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:36:24,614 [INFO] 127.0.0.1 - - [10/Jul/2025 12:36:24] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-07-10 12:42:43,840 [INFO] 127.0.0.1 - - [10/Jul/2025 12:42:43] "GET /login HTTP/1.1" 200 -
+2025-07-10 12:42:43,878 [INFO] 127.0.0.1 - - [10/Jul/2025 12:42:43] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-07-10 12:42:43,880 [INFO] 127.0.0.1 - - [10/Jul/2025 12:42:43] "GET /static/js/app.js HTTP/1.1" 200 -
+2025-07-10 12:42:44,135 [INFO] 127.0.0.1 - - [10/Jul/2025 12:42:44] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-07-10 12:42:47,436 [INFO] 127.0.0.1 - - [10/Jul/2025 12:42:47] "GET /register HTTP/1.1" 200 -
+2025-07-10 12:42:47,478 [INFO] 127.0.0.1 - - [10/Jul/2025 12:42:47] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:42:47,481 [INFO] 127.0.0.1 - - [10/Jul/2025 12:42:47] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2025-07-10 12:43:17,229 [INFO] 127.0.0.1 - - [10/Jul/2025 12:43:17] "POST /register?token= HTTP/1.1" 200 -
+2025-07-10 12:43:17,264 [INFO] 127.0.0.1 - - [10/Jul/2025 12:43:17] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:43:17,269 [INFO] 127.0.0.1 - - [10/Jul/2025 12:43:17] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2025-07-10 12:43:27,248 [INFO] 127.0.0.1 - - [10/Jul/2025 12:43:27] "POST /register?token= HTTP/1.1" 200 -
+2025-07-10 12:43:27,281 [INFO] 127.0.0.1 - - [10/Jul/2025 12:43:27] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:43:27,284 [INFO] 127.0.0.1 - - [10/Jul/2025 12:43:27] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2025-07-10 12:43:36,122 [INFO] 127.0.0.1 - - [10/Jul/2025 12:43:36] "POST /register?token= HTTP/1.1" 200 -
+2025-07-10 12:43:36,145 [INFO] 127.0.0.1 - - [10/Jul/2025 12:43:36] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:43:36,152 [INFO] 127.0.0.1 - - [10/Jul/2025 12:43:36] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2025-07-10 12:43:38,787 [INFO] 127.0.0.1 - - [10/Jul/2025 12:43:38] "GET /login HTTP/1.1" 200 -
+2025-07-10 12:43:38,826 [INFO] 127.0.0.1 - - [10/Jul/2025 12:43:38] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:43:38,830 [INFO] 127.0.0.1 - - [10/Jul/2025 12:43:38] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2025-07-10 12:43:49,698 [INFO] 127.0.0.1 - - [10/Jul/2025 12:43:49] "POST /login HTTP/1.1" 200 -
+2025-07-10 12:43:49,732 [INFO] 127.0.0.1 - - [10/Jul/2025 12:43:49] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:43:49,735 [INFO] 127.0.0.1 - - [10/Jul/2025 12:43:49] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2025-07-10 12:43:52,920 [INFO] 127.0.0.1 - - [10/Jul/2025 12:43:52] "[32mGET /setup_2fa HTTP/1.1[0m" 302 -
+2025-07-10 12:43:52,929 [INFO] 127.0.0.1 - - [10/Jul/2025 12:43:52] "GET /login?next=/setup_2fa HTTP/1.1" 200 -
+2025-07-10 12:43:52,967 [INFO] 127.0.0.1 - - [10/Jul/2025 12:43:52] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:43:52,969 [INFO] 127.0.0.1 - - [10/Jul/2025 12:43:52] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2025-07-10 12:44:01,799 [INFO] 127.0.0.1 - - [10/Jul/2025 12:44:01] "GET /register HTTP/1.1" 200 -
+2025-07-10 12:44:01,842 [INFO] 127.0.0.1 - - [10/Jul/2025 12:44:01] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:44:01,845 [INFO] 127.0.0.1 - - [10/Jul/2025 12:44:01] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2025-07-10 12:44:30,773 [INFO] 127.0.0.1 - - [10/Jul/2025 12:44:30] "POST /register?token= HTTP/1.1" 200 -
+2025-07-10 12:44:30,811 [INFO] 127.0.0.1 - - [10/Jul/2025 12:44:30] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:44:30,814 [INFO] 127.0.0.1 - - [10/Jul/2025 12:44:30] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2025-07-10 12:44:33,659 [INFO] 127.0.0.1 - - [10/Jul/2025 12:44:33] "GET /login HTTP/1.1" 200 -
+2025-07-10 12:44:33,691 [INFO] 127.0.0.1 - - [10/Jul/2025 12:44:33] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:44:33,700 [INFO] 127.0.0.1 - - [10/Jul/2025 12:44:33] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2025-07-10 12:44:38,736 [INFO] 127.0.0.1 - - [10/Jul/2025 12:44:38] "POST /login HTTP/1.1" 200 -
+2025-07-10 12:44:38,768 [INFO] 127.0.0.1 - - [10/Jul/2025 12:44:38] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:44:38,772 [INFO] 127.0.0.1 - - [10/Jul/2025 12:44:38] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2025-07-10 12:44:42,269 [INFO] 127.0.0.1 - - [10/Jul/2025 12:44:42] "GET /register HTTP/1.1" 200 -
+2025-07-10 12:44:42,301 [INFO] 127.0.0.1 - - [10/Jul/2025 12:44:42] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:44:42,305 [INFO] 127.0.0.1 - - [10/Jul/2025 12:44:42] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2025-07-10 12:44:51,460 [INFO] message='Request to Stripe api' method=post path=https://api.stripe.com/v1/customers
+2025-07-10 12:44:51,719 [INFO] message='Stripe API response' path=https://api.stripe.com/v1/customers response_code=401
+2025-07-10 12:44:51,719 [INFO] error_code=None error_message='Invalid API Key provided: your_str**********_key' error_param=None error_type=invalid_request_error message='Stripe API error received'
+2025-07-10 12:44:51,720 [ERROR] Stripe�ڋq�쐬�G���[: Invalid API Key provided: your_str**********_key
+2025-07-10 12:44:51,721 [INFO] 127.0.0.1 - - [10/Jul/2025 12:44:51] "[32mPOST /register?token= HTTP/1.1[0m" 302 -
+2025-07-10 12:44:51,726 [INFO] 127.0.0.1 - - [10/Jul/2025 12:44:51] "GET /register HTTP/1.1" 200 -
+2025-07-10 12:44:51,762 [INFO] 127.0.0.1 - - [10/Jul/2025 12:44:51] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-07-10 12:44:51,764 [INFO] 127.0.0.1 - - [10/Jul/2025 12:44:51] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2025-07-10 13:01:49,446 [INFO]  * Detected change in 'C:\\1akirametakunai\\backend\\app.py', reloading
+2025-07-10 13:01:49,447 [INFO]  * Detected change in 'C:\\1akirametakunai\\backend\\app.py', reloading
+2025-07-10 13:01:50,456 [INFO]  * Restarting with watchdog (windowsapi)

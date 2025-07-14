@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サービスレベルアグリーメント - ISMSサービス</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>サービスレベルアグリーメント（SLA）</h1>
+        <p>本サービスの提供条件について説明します。</p>
+        <h2>1. サービス可用性</h2>
+        <p>当社は99.9%の稼働率を目指しますが、計画的なメンテナンスを除きます。</p>
+        <h2>2. サポート対応</h2>
+        <p>サポートリクエストは24時間以内に確認し、48時間以内に回答します。</p>
+        <h2>3. データバックアップ</h2>
+        <p>データは毎日バックアップされ、AWS S3に安全に保存されます。</p>
+        <h2>4. 責任の制限</h2>
+        <p>サービスの中断による損害について、当社は責任を負いません。</p>
+        <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">ホームに戻る</a>
+        <a href="{{ url_for('support') }}" class="btn btn-secondary mt-3">サポートに問い合わせ</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

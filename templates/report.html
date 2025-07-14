@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ISMSレポート</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        h1, h2, h3 { color: #007bff; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>ISMSレポート</h1>
+    <h2>ポリシー</h2>
+    <table>
+        <tr>
+            <th>タイトル</th>
+            <th>バージョン</th>
+            <th>作成日</th>
+        </tr>
+        {% for policy in policies %}
+            <tr>
+                <td>{{ policy.title }}</td>
+                <td>{{ policy.version }}</td>
+                <td>{{ policy.created_at }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <h2>タスク</h2>
+    <table>
+        <tr>
+            <th>管理策ID</th>
+            <th>説明</th>
+            <th>ステータス</th>
+            <th>担当者</th>
+            <th>期限</th>
+        </tr>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.control_id }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.status }}</td>
+                <td>{{ task.assignee or '未割り当て' }}</td>
+                <td>{{ task.deadline or '未設定' }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <h2>証跡</h2>
+    <table>
+        <tr>
+            <th>ファイル</th>
+            <th>アップロード日時</th>
+            <th>コメント</th>
+            <th>タグ</th>
+        </tr>
+        {% for evidence in evidences %}
+            <tr>
+                <td>{{ evidence.file_path }}</td>
+                <td>{{ evidence.timestamp }}</td>
+                <td>{{ evidence.comment or 'なし' }}</td>
+                <td>{% for tag in evidence.tags %}{{ tag.name }}{% if not loop.last %}, {% endif %}{% endfor %}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

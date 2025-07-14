@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: your-app-name
+    env: python
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    region: oregon
+    plan: free
+    rootDir: backend  # backend配下にあるならここ
+    pythonVersion: 3.10.13  # ← ここで指定！これ無料プランでも有効

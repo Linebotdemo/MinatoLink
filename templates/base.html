@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MinatoLink{% if page %} - {{ page|capitalize|replace('dashboard', 'ダッシュボード')|replace('policies', 'ポリシー')|replace('tasks', 'タスク')|replace('evidence', '証跡')|replace('auditor_view', '監査人ビュー')|replace('create_organization', '組織作成')|replace('manage_users', 'ユーザー管理')|replace('audit_log', '監査ログ')|replace('support', 'サポート')|replace('faq', 'よくある質問') }}{% endif %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% if page == 'dashboard' %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/v-calendar@2.4.1/dist/v-calendar.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/v-calendar@2.4.1/dist/v-calendar.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/shepherd.js@8.3.1/dist/js/shepherd.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/shepherd.js@8/dist/js/shepherd.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/dropzone"></script>
+
+
+    {% endif %}
+    {% if page in ['evidence', 'dashboard'] %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-dropzone@5.9.3/dist/vue-dropzone.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue-dropzone@5.9.3/dist/vue-dropzone.min.js"></script>
+    {% endif %}
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.27.2/dist/axios.min.js"></script>
+    {{ form.csrf_token if form }}
+</head>
+<body class="{% if session.get('theme') == 'dark' %}dark-mode{% endif %}">
+    <div class="container-fluid">
+        <!-- ナビゲーションバー -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url_for('index') }}">MinatoLink</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="ナビゲーションの切り替え">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="navbar-nav ms-auto">
+                        {% if current_user.is_authenticated %}
+                            {% if current_user.email == config['ADMIN_EMAIL'] %}
+                                <a class="nav-link" href="{{ url_for('create_organization') }}">組織作成</a>
+                                <a class="nav-link" href="{{ url_for('manage_users') }}">ユーザー管理</a>
+                                <a class="nav-link" href="{{ url_for('audit_log') }}">監査ログ</a>
+                            {% else %}
+                                <a class="nav-link" href="{{ url_for('dashboard') }}">ダッシュボード</a>
+                                <a class="nav-link" href="{{ url_for('policies') }}">ポリシー</a>
+                                <a class="nav-link" href="{{ url_for('tasks') }}">タスク</a>
+                                <a class="nav-link" href="{{ url_for('evidence') }}">証跡</a>
+                                {% if current_user.role == 'auditor' %}
+                                    <a class="nav-link" href="{{ url_for('auditor_view') }}">監査人ビュー</a>
+                                {% endif %}
+                            {% endif %}
+                            <a class="nav-link" href="{{ url_for('support') }}">サポート</a>
+                            <a class="nav-link" href="{{ url_for('faq') }}">よくある質問</a>
+                            <a class="nav-link" href="{{ url_for('logout') }}">ログアウト</a>
+                            <button class="nav-link btn btn-link" id="toggle-theme">テーマ切り替え</button>
+                        {% else %}
+                            <a class="nav-link" href="{{ url_for('login') }}">ログイン</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- フラッシュメッセージ -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-info mt-4">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- メインコンテンツ -->
+        <div class="container mt-4">
+<!-- ログイン -->
+{% if page == 'login' %}
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2>ログイン</h2>
+            <form method="POST" action="{{ url_for('login') }}">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.email.label }} {{ form.email(class="form-control", placeholder="メールアドレス") }}
+                    {% for error in form.email.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ form.password.label }} {{ form.password(class="form-control", placeholder="パスワード") }}
+                    {% for error in form.password.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% if current_user.is_authenticated and current_user.two_factor_secret %}
+                    <div class="mb-3">
+                        {{ form.totp.label }} {{ form.totp(class="form-control", placeholder="2FAコード") }}
+                        {% for error in form.totp.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <button type="submit" class="btn btn-primary">ログイン</button>
+            </form>
+        </div>
+    </div>
+{% endif %}
+
+
+
+
+            <!-- ダッシュボード -->
+            {% if page == 'dashboard' %}
+                <div class="container mt-4">
+                    <h2>ダッシュボード</h2>
+                    <!-- 通知エリア -->
+                    {% if notifications %}
+                        <div class="alert alert-warning">
+                            <h5>通知</h5>
+                            <ul>
+                                {% for notification in notifications %}
+                                    <li>{{ notification.message }} ({{ notification.timestamp }})</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card text-white bg-success mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">完了率</h5>
+                                    <p class="card-text">{{ stats.completed_percent }}%</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-dark bg-warning mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">残りタスク</h5>
+                                    <p class="card-text">{{ stats.not_started_tasks }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-white bg-info mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">証跡数</h5>
+                                    <p class="card-text">{{ evidences|length }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card p-3">
+                                <h5>証跡アップロード</h5>
+                                <vue-dropzone
+                                    id="dropzone-app"
+                                    :options="dropzoneOptions"
+                                    @vdropzone-success="onUploadSuccess"
+                                    class="border p-3"
+                                    style="min-height: 150px;">
+                                </vue-dropzone>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card p-3">
+                                <h5>外部サービスから取得</h5>
+                                <form method="POST" action="{{ url_for('fetch_external_evidence') }}">
+                                    {{ form.hidden_tag() }}
+                                    <select name="evidence_type" class="form-control mb-2">
+                                        <option value="github">GitHub</option>
+                                        <option value="slack">Slack</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-primary w-100">証跡を取得</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <div class="card p-3">
+                                <h5>最近のアクティビティ</h5>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>ユーザー</th>
+                                            <th>アクション</th>
+                                            <th>詳細</th>
+                                            <th>日時</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for log in recent_logs %}
+                                            <tr>
+                                                <td>{{ log.user.email }}</td>
+                                                <td>{{ log.action }}</td>
+                                                <td>{{ log.details }}</td>
+                                                <td>{{ log.timestamp }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <div class="card p-3">
+                                <h5>証跡アップロード履歴</h5>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>ファイル</th>
+                                            <th>アップロード者</th>
+                                            <th>日時</th>
+                                            <th>コメント</th>
+                                            <th>タグ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for evidence in evidences[:5] %}
+                                            <tr>
+                                                <td>{{ evidence.file_path }}</td>
+                                                <td>{{ evidence.uploaded_by }}</td>
+                                                <td>{{ evidence.timestamp }}</td>
+                                                <td>{{ evidence.comment or 'なし' }}</td>
+                                                <td>{% for tag in evidence.tags %}{{ tag.name }}{% if not loop.last %}, {% endif %}{% endfor %}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button id="start-tour" class="btn btn-outline-secondary">この画面の使い方を見る</button>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <div class="card p-3">
+                                <h5>タスク統計</h5>
+                                <canvas id="taskChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <div class="card p-3">
+                                <h5>タスク期限カレンダー</h5>
+                                <v-calendar id="calendar-app" :attributes="calendar_attributes"></v-calendar>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- ポリシー -->
+            {% if page == 'policies' %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>ポリシー管理</h2>
+                        <!-- 検索・絞り込み -->
+                        <form method="GET" action="{{ url_for('policies') }}" class="mb-3">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control" placeholder="ポリシー名または内容で検索" value="{{ request.args.get('search', '') }}">
+                                <button type="submit" class="btn btn-primary">検索</button>
+                            </div>
+                            <div class="input-group mt-2">
+                                <select name="sort" class="form-control">
+                                    <option value="title" {% if request.args.get('sort') == 'title' %}selected{% endif %}>タイトル順</option>
+                                    <option value="created_at" {% if request.args.get('sort') == 'created_at' %}selected{% endif %}>作成日順</option>
+                                    <option value="version" {% if request.args.get('sort') == 'version' %}selected{% endif %}>バージョン順</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary">並び替え</button>
+                            </div>
+                        </form>
+                        {% if current_user.role != 'auditor' %}
+                            <form method="POST" action="{{ url_for('policies') }}" class="mb-4">
+                                {{ form.hidden_tag() }}
+                                <div class="mb-3">
+                                    {{ form.title.label }} {{ form.title(class="form-control", placeholder="ポリシー名") }}
+                                    {% for error in form.title.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form.content.label }} {{ form.content(class="form-control", placeholder="ポリシー内容") }}
+                                    {% for error in form.content.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form.tags.label }} {{ form.tags(class="form-control", placeholder="タグをカンマ区切りで入力") }}
+                                    {% for error in form.tags.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                <button type="submit" class="btn btn-primary">ポリシーを作成</button>
+                            </form>
+                        {% endif %}
+                        <h3>ポリシー一覧</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>タイトル</th>
+                                    <th>バージョン</th>
+                                    <th>作成日</th>
+                                    <th>タグ</th>
+                                    <th>アクション</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for policy in policies %}
+                                    <tr>
+                                        <td>{{ policy.title }}</td>
+                                        <td>{{ policy.version }}</td>
+                                        <td>{{ policy.created_at }}</td>
+                                        <td>{{ policy.tags|map(attribute='name')|join(', ') }}</td>
+                                        <td>
+                                            <a href="{{ url_for('download_policy_pdf', policy_id=policy.id) }}" class="btn btn-sm btn-info">PDF</a>
+                                            {% if current_user.role != 'auditor' %}
+                                                <a href="{{ url_for('edit_policy', policy_id=policy.id) }}" class="btn btn-sm btn-warning">編集</a>
+                                                <a href="{{ url_for('delete_policy', policy_id=policy.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('本当に削除しますか？')">削除</a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- ポリシー編集 -->
+            {% if page == 'edit_policy' %}
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <h2>ポリシー編集</h2>
+                        <form method="POST" action="{{ url_for('edit_policy', policy_id=policy.id) }}">
+                            {{ form.hidden_tag() }}
+                            <div class="mb-3">
+                                {{ form.title.label }} {{ form.title(class="form-control", value=policy.title, placeholder="ポリシー名") }}
+                                {% for error in form.title.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.content.label }} {{ form.content(class="form-control", value=policy.content, placeholder="ポリシー内容") }}
+                                {% for error in form.content.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.tags.label }} {{ form.tags(class="form-control", value=policy.tags|map(attribute='name')|join(', '), placeholder="タグをカンマ区切りで入力") }}
+                                {% for error in form.tags.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <button type="submit" class="btn btn-primary">更新</button>
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- タスク -->
+            {% if page == 'tasks' %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>タスク管理</h2>
+                        <!-- 検索・絞り込み -->
+                        <form method="GET" action="{{ url_for('tasks') }}" class="mb-3">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control" placeholder="管理策IDまたは説明で検索" value="{{ request.args.get('search', '') }}">
+                                <select name="status" class="form-control">
+                                    <option value="">すべて</option>
+                                    <option value="未開始" {% if request.args.get('status') == '未開始' %}selected{% endif %}>未開始</option>
+                                    <option value="進行中" {% if request.args.get('status') == '進行中' %}selected{% endif %}>進行中</option>
+                                    <option value="完了" {% if request.args.get('status') == '完了' %}selected{% endif %}>完了</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary">検索</button>
+                            </div>
+                            <div class="input-group mt-2">
+                                <select name="sort" class="form-control">
+                                    <option value="control_id" {% if request.args.get('sort') == 'control_id' %}selected{% endif %}>管理策ID順</option>
+                                    <option value="deadline" {% if request.args.get('sort') == 'deadline' %}selected{% endif %}>期限順</option>
+                                    <option value="status" {% if request.args.get('sort') == 'status' %}selected{% endif %}>ステータス順</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary">並び替え</button>
+                            </div>
+                        </form>
+                        {% if current_user.role != 'auditor' %}
+                            <form method="POST" action="{{ url_for('tasks') }}" class="mb-4">
+                                {{ form.hidden_tag() }}
+<div class="mb-3">
+  <label for="control_id" class="form-label">管理策ID</label>
+  <select id="control_id" name="control_id" class="form-select" required>
+    <optgroup label="A.5 組織的管理策">
+      <option value="A.5.1">A.5.1 情報セキュリティの方針群</option>
+      <option value="A.5.2">A.5.2 情報セキュリティの役割と責任</option>
+      <option value="A.5.3">A.5.3 職務の分離</option>
+      <option value="A.5.4">A.5.4 経営陣の責任</option>
+      <option value="A.5.5">A.5.5 連絡点の管理</option>
+      <option value="A.5.6">A.5.6 情報セキュリティに関する連絡</option>
+      <option value="A.5.7">A.5.7 プロジェクトマネジメントにおける情報セキュリティ</option>
+      <option value="A.5.8">A.5.8 脅威インテリジェンス</option>
+      <option value="A.5.9">A.5.9 情報セキュリティに関する意思決定の統合</option>
+      <option value="A.5.10">A.5.10 クラウドサービスの利用に関する情報セキュリティ</option>
+      <option value="A.5.11">A.5.11 ICT供給連鎖のセキュリティ</option>
+      <option value="A.5.12">A.5.12 情報の削除</option>
+      <option value="A.5.13">A.5.13 データマスキング</option>
+      <option value="A.5.14">A.5.14 データ漏洩防止</option>
+      <option value="A.5.15">A.5.15 物理的セキュリティ監視</option>
+      <option value="A.5.16">A.5.16 構成管理</option>
+      <option value="A.5.17">A.5.17 情報削除の確実性</option>
+      <option value="A.5.18">A.5.18 利用者エンドポイントの保護</option>
+      <option value="A.5.19">A.5.19 ソフトウェア取得におけるセキュリティ</option>
+      <option value="A.5.20">A.5.20 技術的脆弱性の管理</option>
+      <option value="A.5.21">A.5.21 情報セキュリティに関する情報の取得と評価</option>
+      <option value="A.5.22">A.5.22 検出機能の実装</option>
+      <option value="A.5.23">A.5.23 情報セキュリティイベントの分析と対処</option>
+      <option value="A.5.24">A.5.24 ビジネス継続のためのICTの備え</option>
+      <option value="A.5.25">A.5.25 法的・規制的及び契約上の要求事項の特定と遵守</option>
+      <option value="A.5.26">A.5.26 検査、監査及びレビューへの準備</option>
+    </optgroup>
+    <optgroup label="A.6 人的セキュリティ">
+      <option value="A.6.1">A.6.1 利用者の責任</option>
+      <option value="A.6.2">A.6.2 雇用前</option>
+      <option value="A.6.3">A.6.3 雇用期間中</option>
+      <option value="A.6.4">A.6.4 雇用終了または変更</option>
+    </optgroup>
+    <optgroup label="A.7 資産管理">
+      <option value="A.7.1">A.7.1 資産の特定と管理</option>
+      <option value="A.7.2">A.7.2 情報の分類</option>
+      <option value="A.7.3">A.7.3 情報の取り扱い</option>
+    </optgroup>
+    <optgroup label="A.8 アクセス制御">
+      <option value="A.8.1">A.8.1 アクセス制御方針</option>
+      <option value="A.8.2">A.8.2 アクセス制御の管理</option>
+      <option value="A.8.3">A.8.3 利用者アクセスの管理</option>
+      <option value="A.8.4">A.8.4 システムおよびアプリケーションへのアクセス制御</option>
+    </optgroup>
+    <optgroup label="A.9 暗号">
+      <option value="A.9.1">A.9.1 暗号の使用</option>
+    </optgroup>
+    <optgroup label="A.10 物理的セキュリティ">
+      <option value="A.10.1">A.10.1 物理的なセキュリティの周辺領域</option>
+      <option value="A.10.2">A.10.2 機器の保護</option>
+    </optgroup>
+    <optgroup label="A.11 運用セキュリティ">
+      <option value="A.11.1">A.11.1 運用手順と責任</option>
+      <option value="A.11.2">A.11.2 マルウェア対策</option>
+      <option value="A.11.3">A.11.3 バックアップ</option>
+      <option value="A.11.4">A.11.4 ログと監視</option>
+      <option value="A.11.5">A.11.5 ソフトウェアのインストール制御</option>
+    </optgroup>
+    <optgroup label="A.12 通信セキュリティ">
+      <option value="A.12.1">A.12.1 ネットワークのセキュリティ</option>
+      <option value="A.12.2">A.12.2 ネットワークサービスのセキュリティ</option>
+    </optgroup>
+    <optgroup label="A.13 システム取得・開発・保守">
+      <option value="A.13.1">A.13.1 情報の転送</option>
+    </optgroup>
+    <optgroup label="A.14 システムの取得、開発、保守">
+      <option value="A.14.1">A.14.1 システムの取得、開発および保守</option>
+      <option value="A.14.2">A.14.2 テストデータの保護</option>
+    </optgroup>
+    <optgroup label="A.15 サプライヤー関係">
+      <option value="A.15.1">A.15.1 サプライヤーの関係における情報セキュリティ</option>
+      <option value="A.15.2">A.15.2 サプライヤーサービスの監視およびレビュー</option>
+      <option value="A.15.3">A.15.3 サプライヤーの変更管理</option>
+    </optgroup>
+    <optgroup label="A.16 インシデント対応">
+      <option value="A.16.1">A.16.1 情報セキュリティインシデントの報告</option>
+      <option value="A.16.2">A.16.2 情報セキュリティインシデントの対応</option>
+      <option value="A.16.3">A.16.3 記録の収集と保管</option>
+    </optgroup>
+    <optgroup label="A.17 事業継続">
+      <option value="A.17.1">A.17.1 情報セキュリティの継続</option>
+      <option value="A.17.2">A.17.2 事業継続の準備</option>
+    </optgroup>
+    <optgroup label="A.18 コンプライアンス">
+      <option value="A.18.1">A.18.1 コンプライアンスと情報セキュリティ</option>
+      <option value="A.18.2">A.18.2 情報セキュリティレビュー</option>
+      <option value="A.18.3">A.18.3 知的財産権の保護</option>
+      <option value="A.18.4">A.18.4 個人識別情報の保護</option>
+      <option value="A.18.5">A.18.5 記録の保護</option>
+      <option value="A.18.6">A.18.6 プライバシーとデータ保護</option>
+    </optgroup>
+  </select>
+</div>
+
+
+                                <div class="mb-3">
+                                    {{ form.description.label }} {{ form.description(class="form-control", placeholder="説明") }}
+
+                                    {% for error in form.description.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form.status.label }} {{ form.status(class="form-control") }}
+                                    {% for error in form.status.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form.assignee.label }} {{ form.assignee(class="form-control", placeholder="担当者") }}
+                                    {% for error in form.assignee.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form.deadline.label }} {{ form.deadline(class="form-control", type="date") }}
+                                    {% for error in form.deadline.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">タスクを作成</button>
+                            </form>
+                            <form method="POST" action="{{ url_for('api_tasks') }}" enctype="multipart/form-data" class="mb-4">
+                                {{ import_form.hidden_tag() }}
+                                <div class="mb-3">
+                                    {{ import_form.file.label }} {{ import_form.file(class="form-control") }}
+                                    {% for error in import_form.file.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                <button type="submit" class="btn btn-primary">CSVをインポート</button>
+                            </form>
+                        {% endif %}
+                        <h3>タスク一覧</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>管理策ID</th>
+                                    <th>説明</th>
+                                    <th>ステータス</th>
+                                    <th>担当者</th>
+                                    <th>期限</th>
+                                    <th>コメント</th>
+                                    <th>アクション</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for task in tasks %}
+                                    <tr>
+                                        <td>{{ task.control_id }}</td>
+                                        <td>{{ task.description }}</td>
+                                        <td>{{ task.status }}</td>
+                                        <td>{{ task.assignee or '未割り当て' }}</td>
+                                        <td>{{ task.deadline or '未設定' }}</td>
+                                        <td>
+                                            {% for comment in task.comments %}
+                                                <p>{{ comment.content }} ({{ comment.timestamp }})</p>
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            {% if current_user.role != 'auditor' %}
+                                                <a href="{{ url_for('edit_task', task_id=task.id) }}" class="btn btn-sm btn-warning">編集</a>
+                                                <a href="{{ url_for('delete_task', task_id=task.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('本当に削除しますか？')">削除</a>
+                                                <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#commentModal{{ task.id }}">コメントを追加</button>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    <!-- コメントモーダル -->
+                                    <div class="modal fade" id="commentModal{{ task.id }}" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">コメントを追加</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="POST" action="{{ url_for('add_task_comment', task_id=task.id) }}">
+                                                        {{ comment_form.hidden_tag() }}
+                                                        <div class="mb-3">
+                                                            {{ comment_form.content.label }} {{ comment_form.content(class="form-control", placeholder="コメントを入力") }}
+                                                            {% for error in comment_form.content.errors %}
+                                                                <span class="text-danger">{{ error }}</span>
+                                                            {% endfor %}
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary">コメントを追加</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- タスク編集 -->
+            {% if page == 'edit_task' %}
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <h2>タスク編集</h2>
+                        <form method="POST" action="{{ url_for('edit_task', task_id=task.id) }}">
+                            {{ form.hidden_tag() }}
+<div class="mb-3">
+  <label for="control_id" class="form-label">管理策ID</label>
+  <select id="control_id" name="control_id" class="form-select" required>
+    <optgroup label="A.5 組織的管理策">
+      <option value="A.5.1">A.5.1 情報セキュリティの方針群</option>
+      <option value="A.5.2">A.5.2 情報セキュリティの役割と責任</option>
+      <option value="A.5.3">A.5.3 職務の分離</option>
+      <option value="A.5.4">A.5.4 経営陣の責任</option>
+      <option value="A.5.5">A.5.5 連絡点の管理</option>
+      <option value="A.5.6">A.5.6 情報セキュリティに関する連絡</option>
+      <option value="A.5.7">A.5.7 プロジェクトマネジメントにおける情報セキュリティ</option>
+      <option value="A.5.8">A.5.8 脅威インテリジェンス</option>
+      <option value="A.5.9">A.5.9 情報セキュリティに関する意思決定の統合</option>
+      <option value="A.5.10">A.5.10 クラウドサービスの利用に関する情報セキュリティ</option>
+      <option value="A.5.11">A.5.11 ICT供給連鎖のセキュリティ</option>
+      <option value="A.5.12">A.5.12 情報の削除</option>
+      <option value="A.5.13">A.5.13 データマスキング</option>
+      <option value="A.5.14">A.5.14 データ漏洩防止</option>
+      <option value="A.5.15">A.5.15 物理的セキュリティ監視</option>
+      <option value="A.5.16">A.5.16 構成管理</option>
+      <option value="A.5.17">A.5.17 情報削除の確実性</option>
+      <option value="A.5.18">A.5.18 利用者エンドポイントの保護</option>
+      <option value="A.5.19">A.5.19 ソフトウェア取得におけるセキュリティ</option>
+      <option value="A.5.20">A.5.20 技術的脆弱性の管理</option>
+      <option value="A.5.21">A.5.21 情報セキュリティに関する情報の取得と評価</option>
+      <option value="A.5.22">A.5.22 検出機能の実装</option>
+      <option value="A.5.23">A.5.23 情報セキュリティイベントの分析と対処</option>
+      <option value="A.5.24">A.5.24 ビジネス継続のためのICTの備え</option>
+      <option value="A.5.25">A.5.25 法的・規制的及び契約上の要求事項の特定と遵守</option>
+      <option value="A.5.26">A.5.26 検査、監査及びレビューへの準備</option>
+    </optgroup>
+    <optgroup label="A.6 人的セキュリティ">
+      <option value="A.6.1">A.6.1 利用者の責任</option>
+      <option value="A.6.2">A.6.2 雇用前</option>
+      <option value="A.6.3">A.6.3 雇用期間中</option>
+      <option value="A.6.4">A.6.4 雇用終了または変更</option>
+    </optgroup>
+    <optgroup label="A.7 資産管理">
+      <option value="A.7.1">A.7.1 資産の特定と管理</option>
+      <option value="A.7.2">A.7.2 情報の分類</option>
+      <option value="A.7.3">A.7.3 情報の取り扱い</option>
+    </optgroup>
+    <optgroup label="A.8 アクセス制御">
+      <option value="A.8.1">A.8.1 アクセス制御方針</option>
+      <option value="A.8.2">A.8.2 アクセス制御の管理</option>
+      <option value="A.8.3">A.8.3 利用者アクセスの管理</option>
+      <option value="A.8.4">A.8.4 システムおよびアプリケーションへのアクセス制御</option>
+    </optgroup>
+    <optgroup label="A.9 暗号">
+      <option value="A.9.1">A.9.1 暗号の使用</option>
+    </optgroup>
+    <optgroup label="A.10 物理的セキュリティ">
+      <option value="A.10.1">A.10.1 物理的なセキュリティの周辺領域</option>
+      <option value="A.10.2">A.10.2 機器の保護</option>
+    </optgroup>
+    <optgroup label="A.11 運用セキュリティ">
+      <option value="A.11.1">A.11.1 運用手順と責任</option>
+      <option value="A.11.2">A.11.2 マルウェア対策</option>
+      <option value="A.11.3">A.11.3 バックアップ</option>
+      <option value="A.11.4">A.11.4 ログと監視</option>
+      <option value="A.11.5">A.11.5 ソフトウェアのインストール制御</option>
+    </optgroup>
+    <optgroup label="A.12 通信セキュリティ">
+      <option value="A.12.1">A.12.1 ネットワークのセキュリティ</option>
+      <option value="A.12.2">A.12.2 ネットワークサービスのセキュリティ</option>
+    </optgroup>
+    <optgroup label="A.13 システム取得・開発・保守">
+      <option value="A.13.1">A.13.1 情報の転送</option>
+    </optgroup>
+    <optgroup label="A.14 システムの取得、開発、保守">
+      <option value="A.14.1">A.14.1 システムの取得、開発および保守</option>
+      <option value="A.14.2">A.14.2 テストデータの保護</option>
+    </optgroup>
+    <optgroup label="A.15 サプライヤー関係">
+      <option value="A.15.1">A.15.1 サプライヤーの関係における情報セキュリティ</option>
+      <option value="A.15.2">A.15.2 サプライヤーサービスの監視およびレビュー</option>
+      <option value="A.15.3">A.15.3 サプライヤーの変更管理</option>
+    </optgroup>
+    <optgroup label="A.16 インシデント対応">
+      <option value="A.16.1">A.16.1 情報セキュリティインシデントの報告</option>
+      <option value="A.16.2">A.16.2 情報セキュリティインシデントの対応</option>
+      <option value="A.16.3">A.16.3 記録の収集と保管</option>
+    </optgroup>
+    <optgroup label="A.17 事業継続">
+      <option value="A.17.1">A.17.1 情報セキュリティの継続</option>
+      <option value="A.17.2">A.17.2 事業継続の準備</option>
+    </optgroup>
+    <optgroup label="A.18 コンプライアンス">
+      <option value="A.18.1">A.18.1 コンプライアンスと情報セキュリティ</option>
+      <option value="A.18.2">A.18.2 情報セキュリティレビュー</option>
+      <option value="A.18.3">A.18.3 知的財産権の保護</option>
+      <option value="A.18.4">A.18.4 個人識別情報の保護</option>
+      <option value="A.18.5">A.18.5 記録の保護</option>
+      <option value="A.18.6">A.18.6 プライバシーとデータ保護</option>
+    </optgroup>
+  </select>
+</div>
+
+
+
+
+
+
+                            <div class="mb-3">
+                                {{ form.description(class="form-control", placeholder="説明") }}
+                                {% for error in form.description.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.status.label }} {{ form.status(class="form-control", value=task.status) }}
+                                {% for error in form.status.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.assignee.label }} {{ form.assignee(class="form-control", value=task.assignee, placeholder="担当者") }}
+                                {% for error in form.assignee.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.deadline.label }} {{ form.deadline(class="form-control", type="date", value=task.deadline|datetimeformat if task.deadline else '') }}
+                                {% for error in form.deadline.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">更新</button>
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- 証跡 -->
+            {% if page == 'evidence' %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>証跡管理</h2>
+                        <!-- 検索・絞り込み -->
+                        <form method="GET" action="{{ url_for('evidence') }}" class="mb-3">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control" placeholder="ファイル名またはコメントで検索" value="{{ request.args.get('search', '') }}">
+                                <input type="text" name="tags" class="form-control" placeholder="タグで絞り込み（カンマ区切り）" value="{{ request.args.get('tags', '') }}">
+                                <button type="submit" class="btn btn-primary">検索</button>
+                            </div>
+                            <div class="input-group mt-2">
+                                <select name="sort" class="form-control">
+                                    <option value="file_path" {% if request.args.get('sort') == 'file_path' %}selected{% endif %}>ファイル名順</option>
+                                    <option value="timestamp" {% if request.args.get('sort') == 'timestamp' %}selected{% endif %}>アップロード日順</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary">並び替え</button>
+                            </div>
+                        </form>
+                        {% if current_user.role != 'auditor' %}
+                            <form method="POST" action="{{ url_for('evidence') }}" enctype="multipart/form-data" class="mb-4">
+                                {{ form.hidden_tag() }}
+                                <div class="mb-3">
+                                    {{ form.file.label }} {{ form.file(class="form-control") }}
+                                    {% for error in form.file.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form.tags.label }} {{ form.tags(class="form-control", placeholder="タグをカンマ区切りで入力") }}
+                                    {% for error in form.tags.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form.comment.label }} {{ form.comment(class="form-control", placeholder="コメント") }}
+                                    {% for error in form.comment.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                <button type="submit" class="btn btn-primary">アップロード</button>
+                            </form>
+                        {% endif %}
+                        <h3>証跡一覧</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ファイル</th>
+                                    <th>アップロード日時</th>
+                                    <th>コメント</th>
+                                    <th>タグ</th>
+                                    <th>アクション</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for evidence in evidences %}
+                                    <tr>
+                                        <td>{{ evidence.file_path }}</td>
+                                        <td>{{ evidence.timestamp }}</td>
+                                        <td>{{ evidence.comment or 'なし' }}</td>
+                                        <td>{{ evidence.tags|map(attribute='name')|join(', ') }}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info preview-btn" data-file="{{ evidence.file_path }}">プレビュー</button>
+                                            <a href="{{ url_for('download_evidence', evidence_id=evidence.id) }}" class="btn btn-sm btn-primary">ダウンロード</a>
+                                            {% if current_user.role != 'auditor' %}
+                                                <a href="{{ url_for('delete_evidence', evidence_id=evidence.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('本当に削除しますか？')">削除</a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <!-- タグ管理 -->
+                        {% if current_user.role == 'admin' %}
+                            <h3>タグ管理</h3>
+                            <form method="POST" action="{{ url_for('manage_tags') }}" class="mb-4">
+                                {{ tag_form.hidden_tag() }}
+                                <div class="mb-3">
+                                    {{ tag_form.name.label }} {{ tag_form.name(class="form-control", placeholder="新しいタグ名") }}
+                                    {% for error in tag_form.name.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                <button type="submit" class="btn btn-primary">タグを追加</button>
+                            </form>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>タグ名</th>
+                                        <th>アクション</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for tag in tags %}
+                                        <tr>
+                                            <td>{{ tag.name }}</td>
+                                            <td>
+                                                <a href="{{ url_for('delete_tag', tag_id=tag.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('本当に削除しますか？')">削除</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- 監査人ビュー -->
+            {% if page == 'auditor_view' %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>監査人ビュー</h2>
+                        <h3>ポリシー一覧</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>タイトル</th>
+                                    <th>バージョン</th>
+                                    <th>作成日</th>
+                                    <th>アクション</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for policy in policies %}
+                                    <tr>
+                                        <td>{{ policy.title }}</td>
+                                        <td>{{ policy.version }}</td>
+                                        <td>{{ policy.created_at }}</td>
+                                        <td>
+                                            <a href="{{ url_for('download_policy_pdf', policy_id=policy.id) }}" class="btn btn-sm btn-info">PDF</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <h3>タスク一覧</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>管理策ID</th>
+                                    <th>説明</th>
+                                    <th>ステータス</th>
+                                    <th>担当者</th>
+                                    <th>期限</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for task in tasks %}
+                                    <tr>
+                                        <td>{{ task.control_id }}</td>
+                                        <td>{{ task.description }}</td>
+                                        <td>{{ task.status }}</td>
+                                        <td>{{ task.assignee or '未割り当て' }}</td>
+                                        <td>{{ task.deadline or '未設定' }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <h3>証跡一覧</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ファイル</th>
+                                    <th>アップロード日時</th>
+                                    <th>コメント</th>
+                                    <th>タグ</th>
+                                    <th>アクション</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for evidence in evidences %}
+                                    <tr>
+                                        <td>{{ evidence.file_path }}</td>
+                                        <td>{{ evidence.timestamp }}</td>
+                                        <td>{{ evidence.comment or 'なし' }}</td>
+                                        <td>{{ evidence.tags|map(attribute='name')|join(', ') }}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info preview-btn" data-file="{{ evidence.file_path }}">プレビュー</button>
+                                            <a href="{{ url_for('download_evidence', evidence_id=evidence.id) }}" class="btn btn-sm btn-primary">ダウンロード</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <a href="{{ url_for('generate_report') }}" class="btn btn-primary">レポートを生成</a>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- 組織作成 -->
+            {% if page == 'create_organization' %}
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <h2>組織作成</h2>
+                        <form method="POST" action="{{ url_for('create_organization') }}">
+                            {{ form.hidden_tag() }}
+                            <div class="mb-3">
+                                {{ form.name.label }} {{ form.name(class="form-control", placeholder="組織名") }}
+                                {% for error in form.name.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <button type="submit" class="btn btn-primary">作成</button>
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- ユーザー管理 -->
+            {% if page == 'manage_users' %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>ユーザー管理</h2>
+                        <form method="POST" action="{{ url_for('manage_users') }}">
+                            {{ form.hidden_tag() }}
+                            <div class="mb-3">
+                                {{ form.email.label }} {{ form.email(class="form-control", placeholder="メールアドレス") }}
+                                {% for error in form.email.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.password.label }} {{ form.password(class="form-control", placeholder="パスワード") }}
+                                {% for error in form.password.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.role.label }} {{ form.role(class="form-control") }}
+                                {% for error in form.role.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.organization_id.label }} {{ form.organization_id(class="form-control") }}
+                                {% for error in form.organization_id.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <button type="submit" class="btn btn-primary">ユーザーを作成</button>
+                        </form>
+                        <h3 class="mt-4">ユーザー一覧</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>メールアドレス</th>
+                                    <th>役割</th>
+                                    <th>組織</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in users %}
+                                    <tr>
+                                        <td>{{ user.email }}</td>
+                                        <td>{{ user.role|replace('user', 'ユーザー')|replace('admin', '管理者')|replace('auditor', '監査人') }}</td>
+                                        <td>{{ user.organization.name }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- 監査ログ -->
+            {% if page == 'audit_log' %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>監査ログ</h2>
+                        <a href="{{ url_for('export_audit_log', format='csv') }}" class="btn btn-primary mb-3">CSVでエクスポート</a>
+                        <a href="{{ url_for('export_audit_log', format='pdf') }}" class="btn btn-primary mb-3">PDFでエクスポート</a>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ユーザー</th>
+                                    <th>アクション</th>
+                                    <th>詳細</th>
+                                    <th>タイムスタンプ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for log in logs %}
+                                    <tr>
+                                        <td>{{ log.user.email }}</td>
+                                        <td>{{ log.action }}</td>
+                                        <td>{{ log.details }}</td>
+                                        <td>{{ log.timestamp }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- サポート -->
+            {% if page == 'support' %}
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <h2>サポート</h2>
+                        <form method="POST" action="{{ url_for('support') }}" enctype="multipart/form-data">
+                            {{ form.hidden_tag() }}
+                            <div class="mb-3">
+                                {{ form.subject.label }} {{ form.subject(class="form-control", placeholder="件名") }}
+                                {% for error in form.subject.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.message.label }} {{ form.message(class="form-control", placeholder="メッセージ") }}
+                                {% for error in form.message.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.file.label }} {{ form.file(class="form-control") }}
+                                {% for error in form.file.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <button type="submit" class="btn btn-primary">送信</button>
+                        </form>
+                        <h3 class="mt-4">問い合わせ履歴</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>件名</th>
+                                    <th>メッセージ</th>
+                                    <th>ファイル</th>
+                                    <th>ステータス</th>
+                                    <th>返信</th>
+                                    <th>送信日時</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for request in support_requests %}
+                                    <tr>
+                                        <td>{{ request.subject }}</td>
+                                        <td>{{ request.message }}</td>
+                                        <td>
+                                            {% if request.file_path %}
+                                                <a href="{{ url_for('download_support_file', request_id=request.id) }}">ダウンロード</a>
+                                            {% else %}
+                                                なし
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ request.status }}</td>
+                                        <td>{{ request.reply or '未返信' }}</td>
+                                        <td>{{ request.timestamp }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% if current_user.role == 'admin' %}
+                            <h3>返信管理</h3>
+                            <form method="POST" action="{{ url_for('reply_support') }}">
+                                {{ reply_form.hidden_tag() }}
+                                <div class="mb-3">
+                                    {{ reply_form.request_id.label }} {{ reply_form.request_id(class="form-control", placeholder="リクエストID") }}
+                                    {% for error in reply_form.request_id.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="mb-3">
+                                    {{ reply_form.reply.label }} {{ reply_form.reply(class="form-control", placeholder="返信内容") }}
+                                    {% for error in reply_form.reply.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="mb-3">
+                                    {{ reply_form.status.label }} {{ reply_form.status(class="form-control") }}
+                                    {% for error in reply_form.status.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                <button type="submit" class="btn btn-primary">返信</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- よくある質問 -->
+            {% if page == 'faq' %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>よくある質問</h2>
+                        <div class="accordion" id="faqAccordion">
+                            {% for faq in faqs %}
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="faqHeading{{ faq.id }}">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse{{ faq.id }}" aria-expanded="true" aria-controls="faqCollapse{{ faq.id }}">
+                                            {{ faq.question }}
+                                        </button>
+                                    </h2>
+                                    <div id="faqCollapse{{ faq.id }}" class="accordion-collapse collapse" aria-labelledby="faqHeading{{ faq.id }}" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            {{ faq.answer }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- プレビューモーダル -->
+        <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="previewModalLabel">ファイルプレビュー</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe id="previewFrame" style="width: 100%; height: 500px;"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- カスタムJS -->
+{% if page == 'dashboard' %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Dropzoneオプション
+    const dropzoneOptions = {
+        url: "{{ url_for('evidence') }}",
+        headers: { 'X-CSRF-Token': "{{ form.csrf_token._value() }}" },
+        acceptedFiles: ".pdf,.doc,.docx,.txt,.png,.csv",
+        maxFilesize: 10,
+        dictDefaultMessage: "ここにファイルをドラッグ＆ドロップまたはクリックしてアップロードしてください"
+    };
+
+    // カレンダー用Vueインスタンス
+    new Vue({
+        el: '#calendar-app',
+        data: {
+            calendar_attributes: {{ calendar_attributes|tojson }}
+        }
+    });
+
+    // Chart.js タスク統計
+    const ctx = document.getElementById('taskChart')?.getContext('2d');
+    if (ctx) {
+        const stats = {{ stats|tojson }};
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['総タスク数', '完了タスク', '進行中タスク', '未開始タスク'],
+                datasets: [{
+                    label: 'タスク統計',
+                    data: [
+                        stats.total_tasks,
+                        stats.completed_tasks,
+                        stats.in_progress_tasks,
+                        stats.not_started_tasks
+                    ],
+                    backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545']
+                }]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    }
+
+    // Shepherd.js ツアー
+    const tour = new Shepherd.Tour({
+        defaultStepOptions: {
+            cancelIcon: { enabled: true },
+            classes: 'shepherd-theme-arrows'
+        },
+        useModalOverlay: true
+    });
+    tour.addStep({
+        id: 'step1',
+        text: 'ダッシュボードへようこそ！ここではタスク、ポリシー、証跡を管理できます。',
+        attachTo: { element: '.navbar-brand', on: 'bottom' },
+        buttons: [{ text: '次へ', action: tour.next }, { text: '終了', action: tour.cancel }]
+    });
+    tour.addStep({
+        id: 'step2',
+        text: 'ここから証跡をアップロードできます。',
+        attachTo: { element: '#dropzone-app', on: 'top' },
+        buttons: [{ text: '前へ', action: tour.back }, { text: '次へ', action: tour.next }]
+    });
+    tour.addStep({
+        id: 'step3',
+        text: '外部サービス（GitHub、Slack）から証跡を取得できます。',
+        attachTo: { element: '.card:has(select[name="evidence_type"])', on: 'top' },
+        buttons: [{ text: '前へ', action: tour.back }, { text: '次へ', action: tour.next }]
+    });
+    tour.addStep({
+        id: 'step4',
+        text: '最近のアクティビティを確認できます。',
+        attachTo: { element: '.card:has(h5:contains("最近のアクティビティ"))', on: 'top' },
+        buttons: [{ text: '前へ', action: tour.back }, { text: '終了', action: tour.cancel }]
+    });
+    document.getElementById('start-tour')?.addEventListener('click', () => tour.start());
+});
+</script>
+{% endif %}
+
+{% if page in ['evidence', 'auditor_view'] %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // vue-dropzone
+    Vue.component('vue-dropzone', vueDropzone);
+    new Vue({
+        el: '#dropzone-app',
+        data: {
+            dropzoneOptions: {
+                url: "{{ url_for('evidence') }}",
+                headers: { 'X-CSRF-Token': "{{ form.csrf_token._value() }}" },
+                acceptedFiles: ".pdf,.doc,.docx,.txt,.png,.csv",
+                maxFilesize: 10,
+                dictDefaultMessage: "ここにファイルをドラッグ＆ドロップまたはクリックしてアップロードしてください"
+            }
+        },
+        methods: {
+            onUploadSuccess(file, response) {
+                alert('証跡がアップロードされました');
+                window.location.reload();
+            }
+        }
+    });
+
+    // select2 初期化
+    $('#control_id').select2({
+        width: '100%',
+        placeholder: "管理策を選択してください",
+        allowClear: true
+    });
+
+    // プレビュー処理
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.preview-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            let filePath = this.getAttribute('data-file');
+            filePath = filePath.replace(/\\/g, '/'); // ← バックスラッシュをスラッシュに変換
+
+            const previewFrame = document.getElementById('previewFrame');
+            if (!filePath || !previewFrame) return;
+
+            console.log('✅ プレビューファイル:', filePath);
+            if (filePath.endsWith('.pdf') || filePath.endsWith('.png')) {
+                previewFrame.src = `/preview_evidence?file=${encodeURIComponent(filePath)}`;
+            } else {
+                previewFrame.src = 'data:text/html,<p>このファイル形式はプレビューに対応していません</p>';
+            }
+
+            new bootstrap.Modal(document.getElementById('previewModal')).show();
+        });
+    });
+});
+</script>
+{% endif %}
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

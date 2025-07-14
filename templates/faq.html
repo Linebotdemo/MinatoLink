@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - ISMSサービス</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="{% if session.get('theme') == 'dark' %}dark-mode{% endif %}">
+    <div class="container-fluid">
+        <!-- ナビゲーションバー -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url_for('index') }}">ISMSサービス</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="navbar-nav ms-auto">
+                        {% if current_user.is_authenticated %}
+                            {% if current_user.email == config['ADMIN_EMAIL'] %}
+                                <a class="nav-link" href="{{ url_for('create_organization') }}">組織作成</a>
+                                <a class="nav-link" href="{{ url_for('manage_users') }}">ユーザー管理</a>
+                                <a class="nav-link" href="{{ url_for('audit_log') }}">監査ログ</a>
+                            {% else %}
+                                <a class="nav-link" href="{{ url_for('dashboard') }}">ダッシュボード</a>
+                                <a class="nav-link" href="{{ url_for('policies') }}">ポリシー</a>
+                                <a class="nav-link" href="{{ url_for('tasks') }}">タスク</a>
+                                <a class="nav-link" href="{{ url_for('evidence') }}">証跡</a>
+                                {% if current_user.role == 'auditor' %}
+                                    <a class="nav-link" href="{{ url_for('auditor_view') }}">監査人ビュー</a>
+                                {% endif %}
+                            {% endif %}
+                            <a class="nav-link" href="{{ url_for('support') }}">サポート</a>
+                            <a class="nav-link" href="{{ url_for('faq') }}">FAQ</a>
+                            <a class="nav-link" href="{{ url_for('logout') }}">ログアウト</a>
+                            <button class="nav-link btn btn-link" id="toggle-theme">テーマ切替</button>
+                        {% else %}
+                            <a class="nav-link" href="{{ url_for('login') }}">ログイン</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- フラッシュメッセージ -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-info mt-4">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- FAQ -->
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>よくある質問</h2>
+                    <div class="accordion" id="faqAccordion">
+                        {% for faq in faqs %}
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faqHeading{{ faq.id }}">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse{{ faq.id }}" aria-expanded="true" aria-controls="faqCollapse{{ faq.id }}">
+                                        {{ faq.question }}
+                                    </button>
+                                </h2>
+                                <div id="faqCollapse{{ faq.id }}" class="accordion-collapse collapse" aria-labelledby="faqHeading{{ faq.id }}" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        {{ faq.answer }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
