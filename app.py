@@ -33,7 +33,8 @@ from flask import after_this_request
 from flask import request, redirect, url_for, session, flash
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user
- 
+from flask_login import login_required, current_user
+from flask import request, redirect, url_for, flash
 # 環境変数の読み込み
 load_dotenv()
 
@@ -1342,17 +1343,16 @@ def change_password():
         flash('新しいパスワードが一致しません', 'danger')
         return redirect(url_for('integrations'))
 
-    db = get_db()
-    cursor = db.cursor()
-    cursor.execute("SELECT password FROM users WHERE id = ?", (current_user.id,))
-    row = cursor.fetchone()
-    if not row or not check_password_hash(row['password'], old_password):
+    # ORMで現在のユーザーを取得
+    user = User.query.get(current_user.id)
+
+    if not user or not check_password_hash(user.password, old_password):
         flash('現在のパスワードが正しくありません', 'danger')
         return redirect(url_for('integrations'))
 
-    hashed_password = generate_password_hash(new_password)
-    cursor.execute("UPDATE users SET password = ? WHERE id = ?", (hashed_password, current_user.id))
-    db.commit()
+    user.password = generate_password_hash(new_password)
+    db.session.commit()
+
     flash('パスワードを変更しました', 'success')
     return redirect(url_for('integrations'))
 
