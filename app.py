@@ -499,11 +499,26 @@ def download_policy_pdf(policy_id):
     if policy.organization_id != current_user.organization_id:
         flash('アクセス権限がありません')
         return redirect(url_for('policies'))
+
     html_content = render_template('policy_pdf.html', policy=policy)
     pdf_file = f'policy_{policy.id}.pdf'
     HTML(string=html_content).write_pdf(pdf_file)
-    db.session.add(AuditLog(user_id=current_user.id, action='download_policy_pdf', details=f'ポリシー {policy.title} のPDFを生成しました'))
+
+    db.session.add(AuditLog(
+        user_id=current_user.id,
+        action='download_policy_pdf',
+        details=f'ポリシー {policy.title} のPDFを生成しました'
+    ))
     db.session.commit()
+
+    @after_this_request
+    def remove_file(response):
+        try:
+            os.remove(pdf_file)
+        except Exception as e:
+            app.logger.warning(f"一時PDF削除失敗: {e}")
+        return response
+
     return send_file(pdf_file, as_attachment=True)
 
 @app.route('/tasks', methods=['GET', 'POST'])
