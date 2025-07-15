@@ -826,10 +826,24 @@ def fetch_external_evidence():
     if current_user.role == 'auditor':
         flash('監査人は証跡を取得できません')
         return redirect(url_for('evidence'))
+
     evidence_type = request.form.get('evidence_type')
+
     if evidence_type == 'github':
-        headers = {'Authorization': f'token {os.getenv("GITHUB_TOKEN")}'}
+        # ✅ DBからそのユーザーの GitHub トークンを取得
+        db = get_db()
+        cursor = db.cursor()
+        cursor.execute('SELECT github_token FROM users WHERE id = ?', (current_user.id,))
+        row = cursor.fetchone()
+
+        if not row or not row['github_token']:
+            flash('GitHub連携がされていません')
+            return redirect(url_for('integrations'))
+
+        token = row['github_token']
+        headers = {'Authorization': f'token {token}'}
         response = requests.get('https://api.github.com/user/repos', headers=headers)
+
         if response.status_code == 200:
             repos = response.json()
             for repo in repos:
@@ -847,6 +861,7 @@ def fetch_external_evidence():
             flash('GitHub証跡の取得に失敗しました')
             db.session.add(Notification(user_id=current_user.id, message='GitHub証跡の取得に失敗しました'))
             db.session.commit()
+
     elif evidence_type == 'slack':
         try:
             result = slack_client.files_list()
@@ -865,7 +880,9 @@ def fetch_external_evidence():
             flash('Slack証跡の取得に失敗しました')
             db.session.add(Notification(user_id=current_user.id, message='Slack証跡の取得に失敗しました'))
             db.session.commit()
+
     return redirect(url_for('evidence'))
+
 
 @app.route('/auditor_view')
 @login_required
@@ -1250,12 +1267,13 @@ def slack_callback():
 
 
 @app.route('/github/login')
+@login_required
 def github_login():
     github_auth_url = (
         "https://github.com/login/oauth/authorize"
         f"?client_id={os.getenv('GITHUB_CLIENT_ID')}"
-        f"&redirect_uri=https://minatolink.onrender.com/github/callback"
-        "&scope=repo"
+        f"&redirect_uri={url_for('github_callback', _external=True)}"
+        "&scope=repo"  # 必要に応じて user, read:org など
     )
     return redirect(github_auth_url)
 
@@ -1263,35 +1281,35 @@ def github_login():
 
 
 @app.route('/github/callback')
+@login_required
 def github_callback():
-    code = request.args.get('code')
-    if not code:
-        flash('GitHub認証に失敗しました', 'danger')
-        return redirect(url_for('dashboard'))
-
-    # トークン取得
+    code = request.args.get("code")
     token_url = "https://github.com/login/oauth/access_token"
-    token_data = {
+    headers = {'Accept': 'application/json'}
+    data = {
         "client_id": os.getenv("GITHUB_CLIENT_ID"),
         "client_secret": os.getenv("GITHUB_CLIENT_SECRET"),
-        "code": code,
+        "code": code
     }
-    headers = {'Accept': 'application/json'}
-    token_res = requests.post(token_url, data=token_data, headers=headers).json()
+    res = requests.post(token_url, headers=headers, data=data)
+    token_json = res.json()
+    access_token = token_json.get("access_token")
 
-    access_token = token_res.get("access_token")
     if not access_token:
-        flash('アクセストークンの取得に失敗しました', 'danger')
-        return redirect(url_for('dashboard'))
+        flash("GitHub連携に失敗しました")
+        return redirect(url_for("integrations"))
 
-    # トークンをセッション or DBに保存（必要なら）
-    session['github_token'] = access_token
+    # 🔐 セッションまたはデータベースに保存
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute(
+        "UPDATE users SET github_token = ? WHERE id = ?",
+        (access_token, current_user.id)
+    )
+    db.commit()
 
-    # 証跡取得処理呼び出し
-    fetch_github_commits(access_token)
-
-    flash('GitHubから証跡を取得しました', 'success')
-    return redirect(url_for('dashboard'))
+    flash("GitHub連携が完了しました")
+    return redirect(url_for("integrations"))
 
 @app.route('/integrations')
 @login_required
