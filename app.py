@@ -33,7 +33,7 @@ from flask import after_this_request
 from flask import request, redirect, url_for, session, flash
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user
-from models import User 
+ 
 # 環境変数の読み込み
 load_dotenv()
 
