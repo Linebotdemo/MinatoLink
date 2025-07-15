@@ -30,6 +30,8 @@ import cloudinary.uploader
 import cloudinary.api
 from flask import send_from_directory, redirect
 from flask import after_this_request
+from flask import request, redirect, url_for, session, flash
+from werkzeug.security import check_password_hash, generate_password_hash
 
 
 # 環境変数の読み込み
@@ -1201,12 +1203,95 @@ def github_login():
     )
     return redirect(github_auth_url)
 
+
+
 @app.route('/github/callback')
 def github_callback():
     code = request.args.get('code')
+    if not code:
+        flash('GitHub認証に失敗しました', 'danger')
+        return redirect(url_for('dashboard'))
+
+    # トークン取得
+    token_url = "https://github.com/login/oauth/access_token"
+    token_data = {
+        "client_id": os.getenv("GITHUB_CLIENT_ID"),
+        "client_secret": os.getenv("GITHUB_CLIENT_SECRET"),
+        "code": code,
+    }
+    headers = {'Accept': 'application/json'}
+    token_res = requests.post(token_url, data=token_data, headers=headers).json()
+
+    access_token = token_res.get("access_token")
+    if not access_token:
+        flash('アクセストークンの取得に失敗しました', 'danger')
+        return redirect(url_for('dashboard'))
+
+    # トークンをセッション or DBに保存（必要なら）
+    session['github_token'] = access_token
+
+    # 証跡取得処理呼び出し
+    fetch_github_commits(access_token)
+
+    flash('GitHubから証跡を取得しました', 'success')
+    return redirect(url_for('dashboard'))
+
+@app.route('/integrations')
+@login_required
+def integrations():
+    return render_template('integrations.html', page='integrations')
+
+@app.route('/change_password', methods=['POST'])
+@login_required
+def change_password():
+    old_password = request.form.get('old_password')
+    new_password = request.form.get('new_password')
+    confirm_password = request.form.get('confirm_password')
+
+    if new_password != confirm_password:
+        flash('新しいパスワードが一致しません', 'danger')
+        return redirect(url_for('integrations'))
+
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT password FROM users WHERE id = ?", (current_user.id,))
+    row = cursor.fetchone()
+    if not row or not check_password_hash(row['password'], old_password):
+        flash('現在のパスワードが正しくありません', 'danger')
+        return redirect(url_for('integrations'))
+
+    hashed_password = generate_password_hash(new_password)
+    cursor.execute("UPDATE users SET password = ? WHERE id = ?", (hashed_password, current_user.id))
+    db.commit()
+    flash('パスワードを変更しました', 'success')
+    return redirect(url_for('integrations'))
 
 
 
+# app.py の最後の方に追記するのがシンプル
+
+def fetch_github_commits(token):
+    repo = "YOUR_ORG/YOUR_REPO"
+    url = f"https://api.github.com/repos/{repo}/commits"
+    headers = {'Authorization': f'token {token}'}
+    res = requests.get(url, headers=headers)
+
+    if res.status_code != 200:
+        print("❌ GitHub APIエラー:", res.text)
+        return
+
+    for commit in res.json():
+        message = commit['commit']['message']
+        author = commit['commit']['author']['name']
+        timestamp = commit['commit']['author']['date']
+
+        db = get_db()
+        cursor = db.cursor()
+        cursor.execute(
+            "INSERT INTO evidence (source, content, timestamp, author) VALUES (?, ?, ?, ?)",
+            ("GitHub", message, timestamp, author)
+        )
+        db.commit()
 
 
 
