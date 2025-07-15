@@ -934,6 +934,7 @@ def manage_users():
     if current_user.email != app.config['ADMIN_EMAIL']:
         flash('運営者権限が必要です')
         return redirect(url_for('dashboard'))
+
     form = UserForm()
     form.organization_id.choices = [(org.id, org.name) for org in Organization.query.all()]
     if not form.organization_id.choices:
@@ -941,6 +942,7 @@ def manage_users():
         db.session.add(default_org)
         db.session.commit()
         form.organization_id.choices = [(default_org.id, default_org.name)]
+
     if form.validate_on_submit():
         user = User(
             email=form.email.data,
@@ -950,6 +952,24 @@ def manage_users():
         )
         db.session.add(user)
         db.session.commit()
+        try:
+            msg = MIMEText(f'アカウントが作成されました。メール: {form.email.data}, パスワード: {form.password.data}')
+            msg['Subject'] = 'ISMSサービス アカウント作成'
+            msg['From'] = os.getenv('SMTP_USER')
+            msg['To'] = form.email.data
+            with smtplib.SMTP(os.getenv('SMTP_SERVER'), os.getenv('SMTP_PORT')) as server:
+                server.starttls()
+                server.login(os.getenv('SMTP_USER'), os.getenv('SMTP_PASSWORD'))
+                server.send_message(msg)
+            flash('ユーザーが作成され、通知メールが送信されました')
+        except Exception:
+            flash('ユーザーは作成されました')
+        return redirect(url_for('manage_users'))
+
+    # ✅ 最後に必ず return を書く
+    users = User.query.all()
+    return render_template('base.html', form=form, users=users, page='manage_users')
+
 
 
 @app.route('/audit_log')
