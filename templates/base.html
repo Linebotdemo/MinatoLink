@@ -1190,7 +1190,7 @@
 {% if page == 'dashboard' %}
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    // Dropzoneオプション
+    // Dropzoneオプション（未使用なら無視される）
     const dropzoneOptions = {
         url: "{{ url_for('evidence') }}",
         headers: { 'X-CSRF-Token': "{{ form.csrf_token._value() }}" },
@@ -1274,7 +1274,7 @@ document.addEventListener('DOMContentLoaded', function () {
 {% if page in ['evidence', 'auditor_view'] %}
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    // vue-dropzone
+    // vue-dropzone 初期化
     Vue.component('vue-dropzone', vueDropzone);
     new Vue({
         el: '#dropzone-app',
@@ -1303,11 +1303,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // プレビュー処理
-document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.preview-btn').forEach(button => {
         button.addEventListener('click', function () {
             let filePath = this.getAttribute('data-file');
-            filePath = filePath.replace(/\\/g, '/'); // ← バックスラッシュをスラッシュに変換
+            filePath = filePath.replace(/\\/g, '/'); // バックスラッシュ → スラッシュ
 
             const previewFrame = document.getElementById('previewFrame');
             if (!filePath || !previewFrame) return;
@@ -1316,7 +1315,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (filePath.endsWith('.pdf') || filePath.endsWith('.png')) {
                 previewFrame.src = `/preview_evidence?file=${encodeURIComponent(filePath)}`;
             } else {
-                previewFrame.src = 'data:text/html,<p>このファイル形式はプレビューに対応していません</p>';
+                previewFrame.src = 'data:text/html,<p style="padding:20px;">このファイル形式はプレビューに対応していません。</p>';
             }
 
             new bootstrap.Modal(document.getElementById('previewModal')).show();
@@ -1326,6 +1325,8 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 {% endif %}
 
+<!-- グローバルJS -->
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>
+
