@@ -831,13 +831,14 @@ def fetch_external_evidence():
     evidence_type = request.form.get('evidence_type')
 
     if evidence_type == 'github':
-        token = current_user.github_token  # Userモデルにgithub_tokenカラムがある前提
+        token = current_user.github_token  # ✅ Userモデルにgithub_tokenが必要
         if not token:
             flash('GitHub連携がされていません')
             return redirect(url_for('integrations'))
 
         headers = {'Authorization': f'token {token}'}
         response = requests.get('https://api.github.com/user/repos', headers=headers)
+        response.encoding = 'utf-8'  # ✅ 文字化け対策を追加！
 
         if response.status_code == 200:
             repos = response.json()
@@ -896,6 +897,7 @@ def fetch_external_evidence():
 
 
 
+
 @app.route('/auditor_view')
 @login_required
 @force_https_and_headers
@@ -948,25 +950,7 @@ def manage_users():
         )
         db.session.add(user)
         db.session.commit()
-        try:
-            msg = MIMEText(f'アカウントが作成されました。メール: {form.email.data}, パスワード: {form.password.data}')
-            msg['Subject'] = 'ISMSサービス アカウント作成'
-            msg['From'] = os.getenv('SMTP_USER')
-            msg['To'] = form.email.data
-            with smtplib.SMTP(os.getenv('SMTP_SERVER'), os.getenv('SMTP_PORT')) as server:
-                server.starttls()
-                server.login(os.getenv('SMTP_USER'), os.getenv('SMTP_PASSWORD'))
-                server.send_message(msg)
-            db.session.add(AuditLog(user_id=current_user.id, action='create_user', details=f'ユーザー {user.email} を作成しました'))
-            db.session.commit()
-            flash('ユーザーが作成され、通知メールが送信されました')
-        except Exception:
-            flash('ユーザーは作成されましたが、メール送信に失敗しました')
-            db.session.add(Notification(user_id=user.id, message='アカウント作成メールの送信に失敗しました'))
-            db.session.commit()
-        return redirect(url_for('manage_users'))
-    users = User.query.all()
-    return render_template('base.html', form=form, users=users, page='manage_users')
+
 
 @app.route('/audit_log')
 @login_required

@@ -93,7 +93,7 @@
                             {% endif %}
                             <a class="nav-link" href="{{ url_for('support') }}">サポート</a>
                             <a class="nav-link" href="{{ url_for('faq') }}">よくある質問</a>
-                            <a class="nav-link" href="{{ url_for('integrations') }}">外部連携/アカウント情報変更</a>
+                            <a class="nav-link" href="{{ url_for('integrations') }}">パスワード変更</a>
                             <a class="nav-link" href="{{ url_for('logout') }}">ログアウト</a>
                             <button class="nav-link btn btn-link" id="toggle-theme">テーマ切り替え</button>
                         {% else %}
@@ -195,33 +195,7 @@
                         </div>
                     </div>
 
-                    <div class="row mt-4">
-                        <div class="col-md-6">
-                            <div class="card p-3">
-                                <h5>証跡アップロード</h5>
-                                <vue-dropzone
-                                    id="dropzone-app"
-                                    :options="dropzoneOptions"
-                                    @vdropzone-success="onUploadSuccess"
-                                    class="border p-3"
-                                    style="min-height: 150px;">
-                                </vue-dropzone>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card p-3">
-                                <h5>外部サービスから取得</h5>
-                                <form method="POST" action="{{ url_for('fetch_external_evidence') }}">
-                                    {{ form.hidden_tag() }}
-                                    <select name="evidence_type" class="form-control mb-2">
-                                        <option value="github">GitHub</option>
-                                        <option value="slack">Slack</option>
-                                    </select>
-                                    <button type="submit" class="btn btn-primary w-100">証跡を取得</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+
 
 
                     <div class="row mt-4">
@@ -571,16 +545,7 @@
 
                                 <button type="submit" class="btn btn-primary">タスクを作成</button>
                             </form>
-                            <form method="POST" action="{{ url_for('api_tasks') }}" enctype="multipart/form-data" class="mb-4">
-                                {{ import_form.hidden_tag() }}
-                                <div class="mb-3">
-                                    {{ import_form.file.label }} {{ import_form.file(class="form-control") }}
-                                    {% for error in import_form.file.errors %}
-                                        <span class="text-danger">{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                                <button type="submit" class="btn btn-primary">CSVをインポート</button>
-                            </form>
+
                         {% endif %}
                         <h3>タスク一覧</h3>
                         <table class="table">
