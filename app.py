@@ -32,8 +32,8 @@ from flask import send_from_directory, redirect
 from flask import after_this_request
 from flask import request, redirect, url_for, session, flash
 from werkzeug.security import check_password_hash, generate_password_hash
-
-
+from flask_login import login_user
+from models import User 
 # 環境変数の読み込み
 load_dotenv()
 
@@ -1301,14 +1301,9 @@ def github_callback():
         flash("GitHub連携に失敗しました")
         return redirect(url_for("integrations"))
 
-    # 🔐 セッションまたはデータベースに保存
-    db = get_db()
-    cursor = db.cursor()
-    cursor.execute(
-        "UPDATE users SET github_token = ? WHERE id = ?",
-        (access_token, current_user.id)
-    )
-    db.commit()
+    # ✅ SQLAlchemyで保存
+    current_user.github_token = access_token
+    db.session.commit()
 
     flash("GitHub連携が完了しました")
     return redirect(url_for("integrations"))
