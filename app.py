@@ -1193,6 +1193,62 @@ def download_evidence(evidence_id):
     return send_from_directory(directory=directory, path=filename, as_attachment=True)
 
 
+
+
+
+
+
+
+
+@app.route('/slack/login')
+def slack_login():
+    slack_client_id = os.getenv("SLACK_CLIENT_ID")
+    redirect_uri = url_for('slack_callback', _external=True)
+    auth_url = (
+        f"https://slack.com/oauth/v2/authorize"
+        f"?client_id={slack_client_id}"
+        f"&scope=channels:read,chat:write,users:read"
+        f"&redirect_uri={redirect_uri}"
+    )
+    return redirect(auth_url)
+
+@app.route('/slack/callback')
+def slack_callback():
+    code = request.args.get('code')
+    if not code:
+        flash("Slack連携に失敗しました（codeがありません）", "danger")
+        return redirect(url_for('integrations'))
+
+    token_url = "https://slack.com/api/oauth.v2.access"
+    data = {
+        "client_id": os.getenv("SLACK_CLIENT_ID"),
+        "client_secret": os.getenv("SLACK_CLIENT_SECRET"),
+        "code": code,
+        "redirect_uri": url_for('slack_callback', _external=True),
+    }
+    res = requests.post(token_url, data=data)
+    token_data = res.json()
+
+    if not token_data.get("ok"):
+        flash("Slack連携に失敗しました: " + token_data.get("error", "不明なエラー"), "danger")
+        return redirect(url_for('integrations'))
+
+    access_token = token_data["access_token"]
+    team_name = token_data["team"]["name"]
+
+    # 任意: DB保存
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute(
+        "INSERT INTO slack_integrations (organization_id, access_token, team_name) VALUES (?, ?, ?)",
+        (current_user.organization_id, access_token, team_name)
+    )
+    db.commit()
+
+    flash(f"Slackチーム「{team_name}」と連携しました", "success")
+    return redirect(url_for('integrations'))
+
+
 @app.route('/github/login')
 def github_login():
     github_auth_url = (
