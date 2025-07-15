@@ -831,17 +831,11 @@ def fetch_external_evidence():
     evidence_type = request.form.get('evidence_type')
 
     if evidence_type == 'github':
-        # ✅ DBからそのユーザーの GitHub トークンを取得
-        db = get_db()
-        cursor = db.cursor()
-        cursor.execute('SELECT github_token FROM users WHERE id = ?', (current_user.id,))
-        row = cursor.fetchone()
-
-        if not row or not row['github_token']:
+        token = current_user.github_token  # Userモデルにgithub_tokenカラムがある前提
+        if not token:
             flash('GitHub連携がされていません')
             return redirect(url_for('integrations'))
 
-        token = row['github_token']
         headers = {'Authorization': f'token {token}'}
         response = requests.get('https://api.github.com/user/repos', headers=headers)
 
@@ -855,12 +849,20 @@ def fetch_external_evidence():
                     organization_id=current_user.organization_id
                 )
                 db.session.add(evidence)
-            db.session.add(AuditLog(user_id=current_user.id, action='fetch_github_evidence', details='GitHubから証跡を取得しました'))
+
+            db.session.add(AuditLog(
+                user_id=current_user.id,
+                action='fetch_github_evidence',
+                details='GitHubから証跡を取得しました'
+            ))
             db.session.commit()
             flash('GitHub証跡が取得されました')
         else:
             flash('GitHub証跡の取得に失敗しました')
-            db.session.add(Notification(user_id=current_user.id, message='GitHub証跡の取得に失敗しました'))
+            db.session.add(Notification(
+                user_id=current_user.id,
+                message='GitHub証跡の取得に失敗しました'
+            ))
             db.session.commit()
 
     elif evidence_type == 'slack':
@@ -874,15 +876,24 @@ def fetch_external_evidence():
                     organization_id=current_user.organization_id
                 )
                 db.session.add(evidence)
-            db.session.add(AuditLog(user_id=current_user.id, action='fetch_slack_evidence', details='Slackから証跡を取得しました'))
+
+            db.session.add(AuditLog(
+                user_id=current_user.id,
+                action='fetch_slack_evidence',
+                details='Slackから証跡を取得しました'
+            ))
             db.session.commit()
             flash('Slack証跡が取得されました')
         except SlackApiError:
             flash('Slack証跡の取得に失敗しました')
-            db.session.add(Notification(user_id=current_user.id, message='Slack証跡の取得に失敗しました'))
+            db.session.add(Notification(
+                user_id=current_user.id,
+                message='Slack証跡の取得に失敗しました'
+            ))
             db.session.commit()
 
     return redirect(url_for('evidence'))
+
 
 
 @app.route('/auditor_view')
