@@ -29,6 +29,8 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 from flask import send_from_directory, redirect
+from flask import after_this_request
+
 
 # 環境変数の読み込み
 load_dotenv()
