@@ -1254,10 +1254,11 @@ def github_login():
     github_auth_url = (
         "https://github.com/login/oauth/authorize"
         f"?client_id={os.getenv('GITHUB_CLIENT_ID')}"
-        f"&redirect_uri={url_for('github_callback', _external=True)}"
+        f"&redirect_uri=https://minatolink.onrender.com/github/callback"
         "&scope=repo"
     )
     return redirect(github_auth_url)
+
 
 
 
