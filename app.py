@@ -1269,13 +1269,15 @@ def slack_callback():
 @app.route('/github/login')
 @login_required
 def github_login():
+    redirect_uri = url_for('github_callback', _external=True).replace("http://", "https://")
     github_auth_url = (
         "https://github.com/login/oauth/authorize"
         f"?client_id={os.getenv('GITHUB_CLIENT_ID')}"
-        f"&redirect_uri={url_for('github_callback', _external=True)}"
-        "&scope=repo"  # 必要に応じて user, read:org など
+        f"&redirect_uri={redirect_uri}"
+        "&scope=repo"
     )
     return redirect(github_auth_url)
+
 
 
 
