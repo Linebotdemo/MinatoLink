@@ -90,6 +90,7 @@ class User(UserMixin, db.Model):
     two_factor_secret = db.Column(db.String(100))
     subscription_plan = db.Column(db.String(50), default='free')
     audit_logs = db.relationship('AuditLog', backref='user', lazy=True)
+    github_token = db.Column(db.String(255))
     support_requests = db.relationship('SupportRequest', backref='user', lazy=True)
     notifications = db.relationship('Notification', backref='user', lazy=True)
 
@@ -1301,12 +1302,14 @@ def github_callback():
         flash("GitHub連携に失敗しました")
         return redirect(url_for("integrations"))
 
-    # ✅ SQLAlchemyで保存
-    current_user.github_token = access_token
+    # ✅ db.sessionで保存
+    user = User.query.get(current_user.id)
+    user.github_token = access_token
     db.session.commit()
 
     flash("GitHub連携が完了しました")
     return redirect(url_for("integrations"))
+
 
 @app.route('/integrations')
 @login_required
